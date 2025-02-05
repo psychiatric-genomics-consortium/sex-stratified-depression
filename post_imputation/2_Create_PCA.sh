@@ -1,3 +1,10 @@
+## Script to identify a set of variants in linkage equilibrium with a maf > 0.05 and use these to construct PCAs using PLINK2
+
+## usage:
+## $ module load plink2
+## $ ./2_Create_PCA.sh {filename}
+## * note {filename} is the original name of your data without the _qc1 and .bed/.bim/.fam suffix 
+
 plink2 \
 --bfile $1_qc1 \
 --maf 0.05 \
