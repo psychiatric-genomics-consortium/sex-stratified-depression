@@ -1,3 +1,20 @@
+## Script to apply quality control (QC) thresholds to imputed data in bfile format using PLINK2
+## Sex should be in column 5 and the depression phenotype should be in column 6 of the .fam file
+## The script will create apply QC thesholds and create whole sample, male-only, and female-only dataset.
+## QC removes:
+## un-phenotyped individuals
+## individuals with unknown sex
+## individuals with more than 10% missing variants
+## multi-allelic variants
+## variants with maf < 0.005
+## variants with a missing rate > 0.1
+## variants out of HWE with p < 1e-6
+
+## usage:
+## $ module load plink2
+## $ ./1_Post_Imputation_QC.sh {filename}
+## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix
+
 plink2 \
 --bfile $1 \
 --prune \
