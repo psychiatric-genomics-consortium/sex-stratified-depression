@@ -1,4 +1,4 @@
-## Script to identify a set of variants in linkage equilibrium with a maf > 0.05 and use these to construct PCAs using PLINK2
+## Script to identify a set of variants in linkage equilibrium with a maf > 0.05 and use these to construct PCs using PLINK2
 
 ## usage:
 ## $ module load plink2
