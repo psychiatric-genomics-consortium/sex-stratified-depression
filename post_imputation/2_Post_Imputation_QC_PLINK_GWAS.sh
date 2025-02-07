@@ -21,7 +21,7 @@ plink2 \
 --bfile $1 \
 --prune \
 --max-alleles 2 \
---remove $1$_king_unrel.king.cutoff.out.id \
+--remove $1_king_unrel.king.cutoff.out.id \
 --remove-nosex \
 --maf 0.005 \
 --geno 0.1 \
@@ -34,7 +34,7 @@ plink2 \
 --bfile $1 \
 --prune \
 --max-alleles 2 \
---remove $1$_king_unrel.king.cutoff.out.id
+--remove $1_king_unrel.king.cutoff.out.id
 --keep-females \
 --maf 0.005 \
 --geno 0.1 \
@@ -47,7 +47,7 @@ plink2 \
 --bfile $1 \
 --prune \
 --max-alleles 2 \
---remove $1$_king_unrel.king.cutoff.out.id
+--remove $1_king_unrel.king.cutoff.out.id
 --keep-males \
 --maf 0.005 \
 --geno 0.1 \
