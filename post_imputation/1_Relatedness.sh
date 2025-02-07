@@ -4,9 +4,10 @@
 ## usage:
 ## $ module load plink2
 ## $ ./1_Relatedness.sh {filename}
-## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix
+## * note {filename} is the name of your data file without the .bed/.bim/.fam suffix
 
-## If > 10% of individuals are related, then it is advised to use regenie for the association analysis to account for relatedness
+## You should compare the number of individuals in your .fam file to the number of individuals listed in the file suffixed with king.cutoff.out.id
+## If > 10% of individuals are related, then it is advised to use regenie for the association analysis to account for relatedness and analysing the whole sample
 ## If <= 10% of individuals are related, then then related individuals can be removed using 2_Post_Imputation_QC_PLINK_GWAS.sh; with plink used for the association analysis
 
 plink2 \
