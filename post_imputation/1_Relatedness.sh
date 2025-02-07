@@ -7,7 +7,7 @@
 ## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix
 
 ## If > 10% of individuals are related, then it is advised to use regenie for the association analysis to account for relatedness
-## If <= 10% of individuals are related, then then related individuals can be removed using 2_Post_Imputation_PLINK_GWAS.sh; with plink used for the association analysis
+## If <= 10% of individuals are related, then then related individuals can be removed using 2_Post_Imputation_QC_PLINK_GWAS.sh; with plink used for the association analysis
 
 plink2 \
 --bfile $1 \
