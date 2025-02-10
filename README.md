@@ -20,11 +20,8 @@ stateDiagram-v2
  2_QC_for_regenie_GWAS.sh --> anc
  2_QC_for_PLINK_GWAS.sh --> anc
  anc --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
-
-```
-
- anc --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
  anc --> Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
+```
  
 ### Step 1
 
