@@ -13,17 +13,18 @@ More detail. PGC group. Analysis. Samples. Processing. Genome build. Imputation 
 
 ```mermaid
 stateDiagram-v2
- state anc <<FORK>>
+ state anc <<join>>
  [*] --> 1_Relatedness.sh : Determine relatedness with
  1_Relatedness.sh --> 2_QC_for_regenie_GWAS.sh : If > 10% related use
  1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
  2_QC_for_regenie_GWAS.sh --> anc
  2_QC_for_PLINK_GWAS.sh -- > anc
+
+```
+
  anc --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
  anc --> Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
  
-```
-
 ### Step 1
 
 Describe this step
