@@ -21,20 +21,11 @@ stateDiagram-v2
  2_QC_for_PLINK_GWAS.sh --> anc
  anc --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
  anc --> Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
+ Create_Single_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
+ Create_Multi_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
 ```
 
 
-
-```mermaid
-stateDiagram-v2
- [*] --> 1_Relatedness.sh : Determine relatedness with
- 1_Relatedness.sh --> 2_QC_for_regenie_GWAS.sh : If > 10% related use
- 1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
- 2_QC_for_regenie_GWAS.sh --> anc:::classDef white color:#022e1f,fill:#fff
- 2_QC_for_PLINK_GWAS.sh --> anc:::classDef white color:#022e1f,fill:#fff
- B --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
- B --> Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
-```
  
  
 ### Step 1
