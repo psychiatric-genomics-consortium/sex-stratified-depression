@@ -13,13 +13,14 @@ More detail. PGC group. Analysis. Samples. Processing. Genome build. Imputation 
 
 ```mermaid
 stateDiagram-v2
+ state rejoin <<join>>
  [*] --> 1_Relatedness.sh : Determine relatedness with
  1_Relatedness.sh --> 2_QC_for_regenie_GWAS.sh : If > 10% related use
  1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
- 2_QC_for_regenie_GWAS.sh --> C{Is cohort sinle ancestry?}
- 2_QC_for_PLINK_GWAS.sh -- > C{}
- C --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
- C --> Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
+ 2_QC_for_regenie_GWAS.sh --> rejoin
+ 2_QC_for_PLINK_GWAS.sh -- > rejoin
+ rejoin --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
+ rejoin --> Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
  
 ```
 
