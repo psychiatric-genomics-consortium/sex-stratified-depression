@@ -9,6 +9,17 @@ These data are private to WHAT DISTRIBUTION until DATE. All results found here c
 
 More detail. PGC group. Analysis. Samples. Processing. Genome build. Imputation reference. Where data are. Who did what when. Or, classic who what where when how why. 
 
+### Post Imputation Steps
+
+```mermaid
+stateDiagram-v2
+ Determine relatedness with --> 1_Relatedness.sh
+ 1_Relatedness.sh --> If > 10% related use
+ 1_Relatedness.sh --> If <= 10% related use
+ If > 10% related use --> 2_QC_for_regenie_GWAS.sh
+ If <= 10% related use --> 2_QC_for_PLINK_GWAS.sh
+```
+
 ### Step 1
 
 Describe this step
