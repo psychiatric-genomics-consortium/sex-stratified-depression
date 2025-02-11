@@ -9,16 +9,35 @@ filename <- args[1]
 
 # load fam file assumes pheno is used in column 6
 famfile<-read.table(paste0(filename,"_qc1.fam"),header=FALSE,sep="")
-# load eigenvec using plink format: FID, IID, PC1, PC2, etc.. Allows first line to be loaded using comment.char
-PCAfile<-read.table(paste0(filename,"_qc1_pca.eigenvec"),comment.char = '&',header=TRUE,sep="")
 
+## Check whether PCs are from plink or eigensoft and prepare accordingly
+## If both files exist then stop and prompt for change to file name or location
+if (file.exists(paste0(filename,"_qc1_pca.eigenvec")) == TRUE && file.exists(paste0(filename,"_qc1_eigen.vec")) == TRUE) {
+  print("Found PCs from both plink and eigensoft. Please rename or move the unwanted file")
+  stop()
+} else if (file.exists(paste0(filename,"_qc1_pca.eigenvec")) == TRUE) {
+## If PCs are in plink format: ID, FID, PC1-PC20
+PCAfile<-read.table(paste0(filename,"_qc1_pca.eigenvec"),comment.char = '&',header=TRUE,sep="")
 # rename 6th column in fam file as pheno
 colnames(famfile)[6]<-"pheno"
 # rename 1st column in PCAfile as FID
 colnames(PCAfile)[1]<-"FID"
-
 # merge fam and PCA file based on IID
 famPCA<-merge(PCAfile,famfile[,c(1,6)],by.x="IID",by.y="V1")
+} else if (file.exists(paste0(filename,"_qc1_eigen.vec")) == TRUE) {
+## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
+PCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_eigen.vec"))))
+# rename columns in PCAfile and convert phenotype to binary. Id and FID switched to match the merge in other data format. This is switched back during write.table
+colnames(PCAfile)<-c("IID","FID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
+PCAfile$pheno[which(PCAfile$pheno == "Control")]<-0
+PCAfile$pheno[which(PCAfile$pheno == "Case")]<-1
+PCAfile$pheno<-as.numeric(PCAfile$pheno)
+# rename PCA file famPCA
+famPCA<-PCAfile
+} else {
+  print("No PCA file found. Please recheck")
+  stop()
+}
 
 # check whether phenotype is coded as 0/1 and if not assume 1/2 and adjust to 0/1
 if (all(names(table(unlist(famPCA$pheno), useNA="ifany")) %in% 0:1) == FALSE) {
@@ -50,21 +69,39 @@ print(paste("Recommended PCs:",list(which(usePCA == 1)),"for whole sample"))
 ## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
 write.table(famPCA[,c(2,1,(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
 
-
 ## Males
 
 # load male fam file assumes pheno is used in column 6
 malefamfile<-read.table(paste0(filename,"_qc1_male.fam"),header=FALSE,sep="")
-# load male eigenvec using plink format: FID, IID, PC1, PC2, etc.. Allows first line to be loaded using comment.char
-malePCAfile<-read.table(paste0(filename,"_qc1_male_pca.eigenvec"),comment.char = '&',header=TRUE,sep="")
 
+## Check whether PCs are from plink or eigensoft and prepare accordingly
+## If both files exist then stop and prompt for change to file name or location
+if (file.exists(paste0(filename,"_qc1_male_pca.eigenvec")) == TRUE && file.exists(paste0(filename,"_qc1_male_eigen.vec")) == TRUE) {
+  print("Found PCs from both plink and eigensoft for males. Please rename or move the unwanted file")
+  stop()
+} else if (file.exists(paste0(filename,"_qc1_male_pca.eigenvec")) == TRUE) {
+## If PCs are in plink format
+malePCAfile<-read.table(paste0(filename,"_qc1_male_pca.eigenvec"),comment.char = '&',header=TRUE,sep="")
 # rename 6th column in fam file as pheno
 colnames(malefamfile)[6]<-"pheno"
 # rename 1st column in PCAfile as FID
 colnames(malePCAfile)[1]<-"FID"
-
 # merge fam and PCA file based on IID
 malefamPCA<-merge(malePCAfile,malefamfile[,c(1,6)],by.x="IID",by.y="V1")
+} else if (file.exists(paste0(filename,"_qc1_male_eigen.vec")) == TRUE) {
+## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
+malePCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_male_eigen.vec"))))
+# rename columns in PCAfile and convert phenotype to binary
+colnames(malePCAfile)<-c("IID","FID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
+malePCAfile$pheno[which(malePCAfile$pheno == "Control")]<-0
+malePCAfile$pheno[which(malePCAfile$pheno == "Case")]<-1
+malePCAfile$pheno<-as.numeric(malePCAfile$pheno)
+# rename PCA file famPCA
+malefamPCA<-malePCAfile
+} else {
+  print("No PCA file found for males. Please recheck")
+  stop()
+}
 
 # check whether phenotype is coded as 0/1 and if not assume 1/2 and adjust to 0/1
 if (all(names(table(unlist(malefamPCA$pheno), useNA="ifany")) %in% 0:1) == FALSE) {
@@ -96,22 +133,39 @@ print(paste("Recommended PCs:",list(which(maleusePCA == 1)),"for male only sampl
 ## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
 write.table(malefamPCA[,c(2,1,(which(maleusePCA == 1)+2))],paste0(filename,"_qc1_male_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
 
-
 ## Females
-
 
 # load female fam file assumes pheno is used in column 6
 femalefamfile<-read.table(paste0(filename,"_qc1_female.fam"),header=FALSE,sep="")
-# load female eigenvec using plink format: FID, IID, PC1, PC2, etc.. Allows first line to be loaded using comment.char
-femalePCAfile<-read.table(paste0(filename,"_qc1_female_pca.eigenvec"),comment.char = '&',header=TRUE,sep="")
 
+## Check whether PCs are from plink or eigensoft and prepare accordingly
+## If both files exist then stop and prompt for change to file name or location
+if (file.exists(paste0(filename,"_qc1_female_pca.eigenvec")) == TRUE && file.exists(paste0(filename,"_qc1_female_eigen.vec")) == TRUE) {
+  print("Found PCs from both plink and eigensoft for females. Please rename or move the unwanted file")
+  stop()
+} else if (file.exists(paste0(filename,"_qc1_female_pca.eigenvec")) == TRUE) {
+## If PCs are in plink format
+femalePCAfile<-read.table(paste0(filename,"_qc1_female_pca.eigenvec"),comment.char = '&',header=TRUE,sep="")
 # rename 6th column in fam file as pheno
 colnames(femalefamfile)[6]<-"pheno"
 # rename 1st column in PCAfile as FID
 colnames(femalePCAfile)[1]<-"FID"
-
 # merge fam and PCA file based on IID
 femalefamPCA<-merge(femalePCAfile,femalefamfile[,c(1,6)],by.x="IID",by.y="V1")
+} else if (file.exists(paste0(filename,"_qc1_female_eigen.vec")) == TRUE) {
+## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
+femalePCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_female_eigen.vec"))))
+# rename columns in PCAfile and convert phenotype to binary
+colnames(femalePCAfile)<-c("IID","FID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
+femalePCAfile$pheno[which(femalePCAfile$pheno == "Control")]<-0
+femalePCAfile$pheno[which(femalePCAfile$pheno == "Case")]<-1
+femalePCAfile$pheno<-as.numeric(femalePCAfile$pheno)
+# rename PCA file famPCA
+femalefamPCA<-femalePCAfile
+} else {
+  print("No PCA file found for females. Please recheck")
+  stop()
+}
 
 # check whether phenotype is coded as 0/1 and if not assume 1/2 and adjust to 0/1
 if (all(names(table(unlist(femalefamPCA$pheno), useNA="ifany")) %in% 0:1) == FALSE) {
