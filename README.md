@@ -19,10 +19,10 @@ stateDiagram-v2
  1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
  2_QC_for_regenie_GWAS.sh --> anc
  2_QC_for_PLINK_GWAS.sh --> anc
- anc --> Create_Single_Ancestry_PCAs.sh : If single ancestry use
- anc --> Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
- Create_Single_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
- Create_Multi_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
+ anc --> 3_Create_Single_Ancestry_PCAs.sh : If single ancestry use
+ anc --> 3_Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
+ 3_Create_Single_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
+ 3_Create_Multi_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
 ```
 
 
