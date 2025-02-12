@@ -14,8 +14,8 @@ More detail. PGC group. Analysis. Samples. Processing. Genome build. Imputation 
 ```mermaid
 stateDiagram-v2
  state anc <<join>>
- state rel <<join>>
  state rel2 <<join>>
+ state rel <<join>>
  [*] --> 1_Relatedness.sh : Determine relatedness with
  1_Relatedness.sh --> 2_QC_for_regenie_GWAS.sh : If > 10% related use
  1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
