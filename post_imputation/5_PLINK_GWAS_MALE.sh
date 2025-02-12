@@ -4,9 +4,9 @@
 
 ## usage:
 ## $ module load plink2
-## $ ./2_QC_for_PLINK_GWAS.sh {filename} {covariatefilename}
+## $ ./5_PLINK_GWAS_MALE.sh {filename} {covariatefilename}
 ## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix. The {covariatefilename} is the full name of the file
-## containing the PCs identified as associated with depression using 4_Associated_PCAs.r along with age and any other relevant covariates
+## containing the sex-specific PCs identified as associated with depression using 4_Associated_PCAs.r along with age and any other relevant covariates
 
 plink2 \
 --bfile $1_qc1_male \
