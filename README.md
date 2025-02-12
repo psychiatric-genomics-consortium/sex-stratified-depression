@@ -15,6 +15,7 @@ More detail. PGC group. Analysis. Samples. Processing. Genome build. Imputation 
 stateDiagram-v2
  state anc <<join>>
  state rel <<join>>
+ state rel2 <<join>>
  [*] --> 1_Relatedness.sh : Determine relatedness with
  1_Relatedness.sh --> 2_QC_for_regenie_GWAS.sh : If > 10% related use
  1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
@@ -28,7 +29,7 @@ stateDiagram-v2
  rel --> 5_PLINK_GWAS_FEMALE.sh
  rel --> 5_PLINK_GWAS_MALE.sh
  rel --> 5_PLINK_GWAS_GxSEX.sh
-
+ 4_Associated_PCAs.r --> rel2 : If used 2_QC_for_regenie_GWAS.sh
 ```
 
 
