@@ -25,11 +25,12 @@ stateDiagram-v2
  anc --> 3_Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
  3_Create_Single_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
  3_Create_Multi_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
+ 4_Associated_PCAs.r --> rel2 : If used 2_QC_for_regenie_GWAS.sh
  4_Associated_PCAs.r --> rel : If used 2_QC_for_PLINK_GWAS.sh
  rel --> 5_PLINK_GWAS_FEMALE.sh
  rel --> 5_PLINK_GWAS_MALE.sh
  rel --> 5_PLINK_GWAS_GxSEX.sh
- 4_Associated_PCAs.r --> rel2 : If used 2_QC_for_regenie_GWAS.sh
+ 
 ```
 
 
