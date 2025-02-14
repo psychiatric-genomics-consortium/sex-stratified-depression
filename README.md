@@ -9,7 +9,8 @@ These data are private to WHAT DISTRIBUTION until DATE. All results found here c
 
 More detail. PGC group. Analysis. Samples. Processing. Genome build. Imputation reference. Where data are. Who did what when. Or, classic who what where when how why. 
 
-### Post Imputation Steps - Autosomal chromosomes
+### Post Imputation Steps 
+## - Autosomal chromosomes
 
 ```mermaid
 stateDiagram-v2
