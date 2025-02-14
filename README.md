@@ -32,7 +32,7 @@ stateDiagram-v2
  rel --> 5_PLINK_GWAS_GxSEX.sh
  rel2 --> 5_regenie_Step1_FEMALE.sh
  rel2 --> 5_regenie_Step1_MALE.sh
- rel2 --> 5_regenie_step1_GxSEX.sh
+ rel2 --> 5_regenie_Step1_GxSEX.sh
  5_regenie_Step1_FEMALE.sh --> 5_regenie_Step2_FEMALE.sh
  5_regenie_Step1_MALE.sh --> 5_regenie_Step2_MALE.sh
  5_regenie_Step1_GxSEX.sh --> 5_regenie_Step2_GxSEX.sh 
