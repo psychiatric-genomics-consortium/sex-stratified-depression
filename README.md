@@ -17,8 +17,10 @@ If your data is already imputed then skip to the ‘Post-imputation Steps’, al
 Imputation should be performed using the ricopili pipeline:
 
 Manuscript - https://academic.oup.com/bioinformatics/article/36/3/930/5545088
-Website - https://sites.google.com/a/broadinstitute.org/ricopili/overview, 
-Tutorial - https://docs.google.com/document/d/1ux_FbwnvSzaiBVEwgS7eWJoYlnc_o0YHFb07SPQsYjI/edit?tab=t.0#heading=h.tkgxq8x9kt6n).
+
+Website - https://sites.google.com/a/broadinstitute.org/ricopili/overview
+
+Tutorial - https://docs.google.com/document/d/1ux_FbwnvSzaiBVEwgS7eWJoYlnc_o0YHFb07SPQsYjI/edit?tab=t.0#heading=h.tkgxq8x9kt6n
 
 Imputation is a multi-stage process of pre-imputation quality control, PCA, and imputation. Analysts should familiarise themselves with the ricopili documentation shown above.  
 
