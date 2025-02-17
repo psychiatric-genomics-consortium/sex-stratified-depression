@@ -2,7 +2,7 @@
 ## Depression phenotype should be in column 6 of the .fam file
 ## This file should be used when there was low relatedness in your sample and they were removed using the 2_QC_for_PLINK_GWAS.sh file
 
-## THIS CODE WILL NEED THE PARAMETERS LINE EDITED BASED ON NUMBER OF COVARIATES AND POSITION OF SEX IN YOUR COVARIATE FILE
+## THIS CODE WILL NEED THE PARAMETERS LINE EDITED BASED ON NUMBER OF COVARIATES AND POSITION OF sex IN YOUR COVARIATE FILE
 ## For example, if you have 10 covariates and sex is the 6th covariate, then {ncovar} is 10 and {sexcovar} is 6
 ## So this makes the parameters line:
 ## --parameters 1-11, 17 \
