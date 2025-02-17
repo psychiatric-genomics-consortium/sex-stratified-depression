@@ -75,7 +75,7 @@ stateDiagram-v2
  
 ### Step 1
 
-Step 1 is to examine your data to determine the proportion of contains second-degree relatives using the KING-robust kinship estimator in PLINK. This can be done using:
+Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be done using:
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh
 
