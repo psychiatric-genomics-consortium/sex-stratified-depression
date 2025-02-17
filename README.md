@@ -11,10 +11,39 @@ All results found here cannot be share, discussed, or presented in any way witho
 
 ## Project overview
 
-More detail. PGC group. Analysis. Samples. Processing. Genome build. Imputation reference. Where data are. Who did what when. Or, classic who what where when how why. 
+### Imputation
+
+If your data is already imputed then skip to the ‘Post-imputation Steps’, although the tools, reference panels, and parameters used for imputation should be reported to the lead authors.
+Imputation should be performed using the ricopili pipeline:
+
+Manuscript - https://academic.oup.com/bioinformatics/article/36/3/930/5545088
+Website - https://sites.google.com/a/broadinstitute.org/ricopili/overview, 
+Tutorial - https://docs.google.com/document/d/1ux_FbwnvSzaiBVEwgS7eWJoYlnc_o0YHFb07SPQsYjI/edit?tab=t.0#heading=h.tkgxq8x9kt6n).
+
+Imputation is a multi-stage process of pre-imputation quality control, PCA, and imputation. Analysts should familiarise themselves with the ricopili documentation shown above.  
+
+The default settings should be used for the ‘preimp’ and ‘pca’ modules.
+
+A detailed QC report will be generated during the ‘preimp’ stage and will be placed in the ‘qc/’ subdirectory and this report should be shared with the lead authors to aid with manuscript writing. Any ‘amber’ and ‘red’ flags should be examined, and steps should be taken (see ricopili tutorial) to address the identified issues. Please keep a record of the steps taken and share those with the lead authors.
+
+To conduct the imputation, the largest reference panel suitable for the ancestry of your data should be used. For example, for European ancestry data the HRC panel should be used, whilst other ancestries are generally better represented using the relevant 1000 genomes panel. Please record which panel was used and report this to the lead authors.
+
+The imputed data should be converted to best guess/hard called genotypes with variants with an imputation accuracy (INFO) score less than 0.6 removed.
+
+If you have X chromosome data, then the imputation should be conducted separately for males and females and follow the guidance provided here: https://docs.google.com/document/d/1qeQFfvqNI2Lkp6XCYXmnGoEL3f9LRPJcMpwRk0rnJf4/edit?tab=t.0#heading=h.eti7izkzx2ko
 
 ### Post Imputation Steps 
 #### - Autosomal chromosomes
+
+The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
+
+We have prepared sample code using PLINK2, regenie, eigensoft, and R for the remaining steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. 
+
+The code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file and depression (control = 1, case = 2) in column six of the fam file. 
+
+All code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
+
+The schematic below illustrates the sample code available in the post-imputation folder.
 
 ```mermaid
 stateDiagram-v2
@@ -76,28 +105,25 @@ And repeat
 until finished
 ```
 
-## Checking the results
-
-Sanity checks on results. 
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [PLINK2](https://www.cog-genomics.org/plink/2.0/)
+* [eigensoft](https://github.com/DReichLab/EIG)
+* [R](https://www.r-project.org/)
+* [regenie](https://rgcgithub.github.io/regenie/options/)
 
 ## Analysts
 
-* **Person Numberone** - *analyst* - [PGC](https://med.unc.edu/pgc)
+* **David Howard** - *analyst* - [PGC](https://med.unc.edu/pgc)
+* **Joel Gelernter** - *analyst* - [PGC](https://med.unc.edu/pgc)
+* **Dan Levey** - *analyst* - [PGC](https://med.unc.edu/pgc)
+* **Murray Stein** - *analyst* - [PGC](https://med.unc.edu/pgc)
 
 ## License
 
-This project is licensed under XXX License - see the [LICENSE](LICENSE) file for details
+This project is licensed under MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
-* readme template from https://gist.github.com/PurpleBooth/109311bb0361f32d87a2#file-readme-template-md
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+* Mark Adams, Andrew McIntosh, Cathryn Lewis, Swapnil Awasthi, Brittany Mitchell
