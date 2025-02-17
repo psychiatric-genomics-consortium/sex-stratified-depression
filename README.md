@@ -149,12 +149,13 @@ Please also prepare a readme file to accompany the summary statistics based on t
 * [R](https://www.r-project.org/)
 * [regenie](https://rgcgithub.github.io/regenie/options/)
 
-## Analysts
+## Lead Analysts
 
 * **David Howard** - *analyst* - [PGC](https://med.unc.edu/pgc)
 * **Joel Gelernter** - *analyst* - [PGC](https://med.unc.edu/pgc)
 * **Dan Levey** - *analyst* - [PGC](https://med.unc.edu/pgc)
 * **Murray Stein** - *analyst* - [PGC](https://med.unc.edu/pgc)
+* **Mark Adams** - *analyst* - [PGC](https://med.unc.edu/pgc)
 
 ## License
 
@@ -162,4 +163,4 @@ This project is licensed under MIT License - see the [LICENSE](LICENSE) file for
 
 ## Acknowledgments
 
-* Mark Adams, Andrew McIntosh, Cathryn Lewis, Swapnil Awasthi, Brittany Mitchell
+* Andrew McIntosh, Cathryn Lewis, Swapnil Awasthi, Brittany Mitchell
