@@ -43,7 +43,7 @@ We have prepared sample code using PLINK2, regenie, eigensoft, and R for the pos
 
 All code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
 
-The schematic below illustrates the sample code available in the post-imputation folder: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation
+The schematic below illustrates the pipeline and sample code available in the post-imputation folder: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation
 
 ```mermaid
 stateDiagram-v2
