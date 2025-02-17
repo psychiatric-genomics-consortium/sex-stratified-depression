@@ -115,6 +115,7 @@ It is then down to the analyst to prepare a covariate file combining these PCs w
 ### Step 5
 
 Step 5 is to run the GWAS. There are three association analyses to be performed: whole sample with a genotype-by-sex interaction, male-only, and female-only.  If your sample includes only one sex, then only an analysis of that sex is possible. File formats and naming conventions are provided at the end of the document and these should be followed as closely as possible.
+
 If related individuals were removed in step 2 then run the following scripts to run the three GWAS in PLINK:
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh
@@ -123,7 +124,7 @@ https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blo
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh
 
-If you have relatedness in your sample and are intending to use regenie for the GWAS then there are two stages to this analysis. First you need to run:
+or if you have relatedness in your sample and are intending to use regenie for the GWAS then there are two stages to this analysis. First you need to run:
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_GxSEX.sh
 
