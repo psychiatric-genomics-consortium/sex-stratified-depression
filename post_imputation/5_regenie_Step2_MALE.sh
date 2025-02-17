@@ -1,0 +1,22 @@
+## Script to run step 2 of regenie using imputed data for males in bfile format
+## This file should be run after running 5_regenie_Step1_MALE.sh and checking the .log file for any errors 
+
+## usage:
+## $ module load regenie
+## $ ./5_regenie_Step2_MALE.sh {filename} {covariate filename}
+## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix. The {covariatefilename} is the full name of the file
+## containing the PCs identified as associated with depression using 4_Associated_PCAs.r along with age and any other relevant covariates
+
+regenie \
+--step 2 \
+--bed $1_qc1_male \
+--covarFile $2 \
+--phenoFile $1_qc1_male.pheno \
+--cc12 \
+--bsize 200 \
+--bt \
+--af-cc \
+--firth \
+--pThresh 0.05 \
+--pred $1_qc1_male_regenie_step1_pred.list \
+--out $1_qc1_male_regenie_firth
