@@ -74,31 +74,70 @@ stateDiagram-v2
 ### Step 1
 
 Step 1 is to examine your data to determine the proportion of contains second-degree relatives using the KING-robust kinship estimator in PLINK. This can be done using:
+
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh
+
 To identify the proportion of relatives you will need to compare the number of individuals written to *king.cutoff.out.id with the number of individuals in the fam file. Note that’s the *king.cutoff.out.id contains a header row so you will need to subtract 1 if you use wc -l * king.cutoff.out.id to count the number of rows.
 If the proportion of related individuals is less than or equal to 10% of the whole sample, then you can opt to remove them and run the GWAS using PLINK. If your sample contains more than 10% related individuals, then regenie is the preferred way to conduct the GWAS. You can also opt to use regenie regardless of the relatedness in your sample.
 
 ### Step 2
 
-Describe this step
+Step 2 is to apply quality control to prepare the data for either a PLINK (removing relatives) or a regenie GWAS (not removing relatives). The quality control removes individuals that aren’t phenotyped, don’t have a recoded sex or have an individual call rate less than 10%. Variants are removed which have a minor allele frequency < 0.005, have a variant call rate less than10%, that are out of Hardy-Weinberg equilibrium with p < 10-6, or that aren’t biallelic. Two additional subsamples are also created: one for males only and one for females only with the quality control applied to each of those subsamples.
+To prepare for a PLINK GWAS use:
 
-```
-Code used 2
-```
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_PLINK_GWAS.sh
+
+or to prepare for a regenie GWAS use:
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_regenie_GWAS.sh
 
 ### Step 3
 
-Describe this step
+Step 3 is to obtain the first 20 genetic principal components (PCs). If the ricopili pipeline was used, these PCs are created during the ‘pca’ module and stored in pacer_{filename}/{filename.menv.mvs} and these can be used. If you don’t have access to these PCs or didn’t use ricopili, then the PCs can be created using the scripts below. If your data was obtained from a single ancestry, then PLINK can be used. If your data contains individuals from multiple ancestries, then eigensoft is recommended. The PCs should be created from SNPs that are in linkage equilibrium (using 200kb window and r2 threshold of 0.5) and have a minor allele frequency > 0.05.
+To create PCs for a single ancestry cohort use:
 
-```
-Code used 3
-```
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/3_Create_Single_Ancestry_PCAs.sh
 
-And repeat
+or to create PCs for a multi ancestry cohort use:
 
-```
-until finished
-```
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/3_Create_Multi_Ancestry_PCAs.sh
+
+### Step 4
+
+Step 4 is to determine the PCs that will be included as covariates in the GWAS. The first 4 PCs and thereafter each component nominally associated (p<0.05) with case-control status should be included. A logistic regression of depression status on each component in turn should be used to determine an association and this can be achieved using the following R code:
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/4_Associated_PCAs.r
+
+It is then down to the analyst to prepare a covariate file combining these PCs with other appropriate covariates for each analysis, such as age, genotyping batch, etc. The covariates should have a header row, with the first two columns containing family ID, and individual ID, with the remaining columns containing the associated PCs and any other covariates. For the whole sample genotype-by-sex interaction analysis sex (1 = male, 2 = female) should be included with ‘sex’ in the header row.
+
+### Step 5
+
+Step 5 is to run the GWAS. There are three association analyses to be performed: whole sample with a genotype-by-sex interaction, male-only, and female-only.  If your sample includes only one sex, then only an analysis of that sex is possible. File formats and naming conventions are provided at the end of the document and these should be followed as closely as possible.
+If related individuals were removed in step 2 then run the following scripts to run the three GWAS in PLINK:
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_FEMALE.sh
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh
+
+If you have relatedness in your sample and are intending to use regenie for the GWAS then there are two stages to this analysis. First you need to run:
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_GxSEX.sh
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_FEMALE.sh
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_MALE.sh
+
+followed by:
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_GxSEX.sh
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_FEMALE.sh
+
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_MALE.sh
+
+Please also prepare a readme file to accompany the summary statistics based on the description at the end of this document.
 
 
 ## Built With
