@@ -33,17 +33,15 @@ The imputed data should be converted to best guess/hard called genotypes with va
 If you have X chromosome data, then the imputation should be conducted separately for males and females and follow the guidance provided here: https://docs.google.com/document/d/1qeQFfvqNI2Lkp6XCYXmnGoEL3f9LRPJcMpwRk0rnJf4/edit?tab=t.0#heading=h.eti7izkzx2ko
 
 ### Post Imputation Steps 
-#### - Autosomal chromosomes
+#### Autosomal chromosomes
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-We have prepared sample code using PLINK2, regenie, eigensoft, and R for the remaining steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. 
-
-The code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file and depression (control = 1, case = 2) in column six of the fam file. 
+We have prepared sample code using PLINK2, regenie, eigensoft, and R for the post imputation steps. The code expects your imputed data to be in best guess/hard called .bed/.bim/.fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file and depression (control = 1, case = 2) in column six of the fam file. 
 
 All code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
 
-The schematic below illustrates the sample code available in the post-imputation folder.
+The schematic below illustrates the sample code available in the post-imputation folder: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation
 
 ```mermaid
 stateDiagram-v2
@@ -71,17 +69,14 @@ stateDiagram-v2
  5_regenie_Step1_MALE.sh --> 5_regenie_Step2_MALE.sh
  5_regenie_Step1_GxSEX.sh --> 5_regenie_Step2_GxSEX.sh 
 ```
-
-
  
  
 ### Step 1
 
-Describe this step
-
-```
-Code used 1
-```
+Step 1 is to examine your data to determine the proportion of contains second-degree relatives using the KING-robust kinship estimator in PLINK. This can be done using:
+https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh
+To identify the proportion of relatives you will need to compare the number of individuals written to *king.cutoff.out.id with the number of individuals in the fam file. Note that’s the *king.cutoff.out.id contains a header row so you will need to subtract 1 if you use wc -l * king.cutoff.out.id to count the number of rows.
+If the proportion of related individuals is less than or equal to 10% of the whole sample, then you can opt to remove them and run the GWAS using PLINK. If your sample contains more than 10% related individuals, then regenie is the preferred way to conduct the GWAS. You can also opt to use regenie regardless of the relatedness in your sample.
 
 ### Step 2
 
