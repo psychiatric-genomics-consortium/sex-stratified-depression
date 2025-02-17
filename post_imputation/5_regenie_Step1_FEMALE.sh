@@ -20,4 +20,4 @@ regenie \
 --cc12 \
 --bsize 100 \
 --bt \
---out $1_qc1_regenie_step1_female
+--out $1_qc1_female_regenie_step1
