@@ -32,7 +32,7 @@ To conduct the imputation, the largest reference panel suitable for the ancestry
 
 The imputed data should be converted to best guess/hard called genotypes with variants with an imputation accuracy (INFO) score less than 0.6 removed.
 
-If you have X chromosome data, then the imputation should be conducted separately for males and females and follow the guidance provided here: https://docs.google.com/document/d/1qeQFfvqNI2Lkp6XCYXmnGoEL3f9LRPJcMpwRk0rnJf4/edit?tab=t.0#heading=h.eti7izkzx2ko
+If you have X chromosome data, then the imputation should be conducted separately for males and females and follow the ricopili guidance provided here: https://docs.google.com/document/d/1qeQFfvqNI2Lkp6XCYXmnGoEL3f9LRPJcMpwRk0rnJf4/edit?tab=t.0#heading=h.eti7izkzx2ko
 
 ### Post Imputation Steps 
 #### Autosomal chromosomes
@@ -142,6 +142,71 @@ https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blo
 
 Please also prepare a readme file to accompany the summary statistics based on the description at the end of this document.
 
+### File formats and naming conventions
+
+•	Save data as a gzip-compressed, tab-separated plain text file
+•	Filename: COHORT[-SUBCOHORT]_CLUSTER_SEX_SOMES_VERSION.FORMAT.gz
+o	COHORT: abbreviation or code for cohort name. E.g., UK Biobank = UKBB, Generation Scotland = GenScot
+o	SUBCOHORT: Subcohort or substudy name, separated from cohort abbreviation by a hyphen (optional). For example, for GenScot: Scottish Family Health Study = -SFHS ("GenScot-SFHS").  Only required if submitting multiple sumstats files from subcohorts that are part of the same study. 
+o	CLUSTER: Genetic similarity cluster abbreviation (three letter code, upper case; i.e., AFR, AMR, CSE, EAS, EUR, MID, HIS, SAS).
+o	SEX: FEMALE, MALE, or BOTH
+o	SOMES: Chromosomes included in file (AUTO = autosomes, ALLO = sex chromosomes)  
+o	VERSION: Version identifier for this analysis, to indicate dataset release / analyst / date etc. Examples: UK Biobank → ukb21007-hrc-noPGC,  Biobank Japan → SakaueKanai2020, FinnGen → R12.
+o	FORMAT: sumstats format (plink, regenie, daner, xwas)
+•	For COHORT, SUBCOHORT, and VERSION, use only letters, numbers, and hyphens (no spaces, periods, underscores, or other punctuation).
+Sumstats required information
+Sumstats (output from regenie, plink2, XWAS, Ricopoli) should have the following information:
+•	Chromosome (CHR): 1-23 (numeric)
+•	Marker (ID, SNP): Variant identifier, preferably reference SNP ID (rsID). If rsID not available: chromosome-position (CPID) formatted as CHR_POS_REF_ALT
+•	Basepair position (POS, BP): GRCh37
+•	Effect allele 
+o	PLINK: A1
+o	regenie: allele1
+o	daner: A1
+•	Non-effect allele
+o	PLINK: A2
+o	regenie: allele0
+o	daner: A2
+•	Frequency of effect allele in cases and controls
+o	PLINK: A1_CASE_FREQ, A1_CTRL_FREQ
+o	regenie: A1FREQ_CASES, A1FREQ_CONTROLS
+o	daner: FRQ_A, FRQ_U
+•	Sample size of cases and controls
+o	PLINK: A1_CASE_FREQ, A1_CTRL_FREQ, ALLELE_CT, OBS_CT
+o	regenie: N_CASES, N_CONTROLS
+o	daner: Nca, Nco
+•	Imputation info score 
+o	PLINK: MACH_R2
+o	regenie: INFO
+o	daner: INFO
+•	Effect size: Odds ratio or log(Odds ratio)
+o	PLINK: OR
+o	regenie: BETA
+o	daner: OR
+•	Standard error: SE of log(OR)
+o	PLINK: LOG(OR)_SE
+o	regenie: SE
+o	daner: SE
+•	Test statistic of association 
+o	PLINK: Z_STAT
+o	regenie: CHISQ
+•	Association test -log10(p-value)
+o	PLINK: NEG_LOG10_P
+o	regenie: LOG10P
+
+### README file
+
+Prepare a plaintext file with analyst and study information called COHORT[-SUBCOHORT]_VERSION.readme. Include:
+•	Contact name, institution, email
+•	Study name
+•	PIs and analyst names, emails, and ORCiDs
+•	Study description.
+•	Total numbers of cases and controls for each analysis
+•	Array version(s), imputation panel, and genotype build.
+•	Genotyping and association analysis details
+•	Ethics statements
+•	PubMed ID references
+•	Grant codes and acknowledgments
 
 ## Built With
 
