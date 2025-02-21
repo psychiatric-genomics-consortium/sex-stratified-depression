@@ -39,7 +39,11 @@ If you have X chromosome data, then the imputation should be conducted separatel
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-We have prepared sample code using PLINK2, regenie, eigensoft, and R for the post imputation steps. The code expects your imputed data to be in best guess/hard called .bed/.bim/.fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file and depression (control = 1, case = 2) in column six of the fam file. 
+We have prepared sample code using PLINK2, regenie, eigensoft, and R for the post imputation steps. The code expects your imputed data to be in best guess/hard called .bed/.bim/.fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. A depression phenotype file (control = 1, case = 2) is required and should have the same name as your imputed data and suffixed .pheno. If your depression phenotype is only in column six of the fam file, then the phenotype file can be created by typing:
+
+```
+awk '{print $1, $2, $6}' filename.fam > filename.pheno
+```
 
 All code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
 
