@@ -39,11 +39,7 @@ If you have X chromosome data, then the imputation should be conducted separatel
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-We have prepared sample code using PLINK2, regenie, eigensoft, and R for the post imputation steps. The code expects your imputed data to be in best guess/hard called .bed/.bim/.fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) without headers is required and should have the same name as your imputed data and suffixed .pheno. If your depression phenotype is only in column six of the fam file, then the phenotype file can be created by typing:
-
-```
-awk '{print $1, $2, $6}' filename.fam > filename.pheno
-```
+We have prepared sample code using PLINK2, regenie, eigensoft, and R for the post imputation steps. The code expects your imputed data to be in best guess/hard called .bed/.bim/.fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is expected and will need to have the same name as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression). If your depression phenotype is also in column six of the fam file you will need to delete the lines starting --pheno or --phenoFile from the GWAS scripts in step 5 otherwise the GWAS will be performed twice with two identical outputs.
 
 All code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
 
@@ -63,14 +59,14 @@ stateDiagram-v2
  anc --> 3_Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
  3_Create_Single_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
  3_Create_Multi_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
- 4_Associated_PCAs.r --> rel2 : If used 2_QC_for_regenie_GWAS.sh
+ 4_Associated_PCAs.r --> 5_regenie_Prep_Geno.sh : If used 2_QC_for_regenie_GWAS.sh
  4_Associated_PCAs.r --> rel : If used 2_QC_for_PLINK_GWAS.sh
  rel --> 5_PLINK_GWAS_FEMALE.sh
  rel --> 5_PLINK_GWAS_MALE.sh
  rel --> 5_PLINK_GWAS_GxSEX.sh
- rel2 --> 5_regenie_Step1_FEMALE.sh
- rel2 --> 5_regenie_Step1_MALE.sh
- rel2 --> 5_regenie_Step1_GxSEX.sh
+ 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_FEMALE.sh
+ 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_MALE.sh
+ 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_GxSEX.sh
  5_regenie_Step1_FEMALE.sh --> 5_regenie_Step2_FEMALE.sh
  5_regenie_Step1_MALE.sh --> 5_regenie_Step2_MALE.sh
  5_regenie_Step1_GxSEX.sh --> 5_regenie_Step2_GxSEX.sh 
