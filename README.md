@@ -125,7 +125,7 @@ It is then down to the analyst to prepare a covariate file combining these PCs w
 
 Step 5 is to run the GWAS. There are three association analyses to be performed: whole sample with a genotype-by-sex interaction, male-only, and female-only.  If your sample includes only one sex, then only an analysis of that sex is possible. File formats and naming conventions are provided at the end of the document, and these should be followed as closely as possible.
 
-If related individuals were removed in step 2 then run the following scripts to run the three GWAS in ####PLINK. You will need to update the --parameters line for the GxSex analysis to provide the correct values based on the number and position of your covariates, see sample code for details:
+If related individuals were removed in step 2 then run the following scripts to run the three GWAS in **PLINK**. You will need to update the --parameters line for the GxSex analysis to provide the correct values based on the number and position of your covariates, see sample code for details:
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh
 
@@ -133,7 +133,7 @@ https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blo
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh
 
-If you have relatedness in your sample or you are intending to use ####regenie for the GWAS then there are multiple stages to this analysis. Firstly, a genomic relationship matrix is created using the original genotyped variants. You need to create a single-column list of genotyped variants’ IDs for your data and save it in a file called genotypedvariants.txt with no header row in your working directory. Then running the following code will apply the required quality control (minor allele frequency of ≥1%, a Hardy–Weinberg equilibrium test not exceeding P = 1 × 10−15, a variant call rate above 99%, and LD pruned using a R2 threshold of 0.9 with a window size of 1,000 markers and a step size of 100 markers):
+If you have relatedness in your sample or you are intending to use **regenie** for the GWAS then there are multiple stages to this analysis. Firstly, a genomic relationship matrix is created using the original genotyped variants. You need to create a single-column list of genotyped variants’ IDs for your data and save it in a file called genotypedvariants.txt with no header row in your working directory. Then running the following code will apply the required quality control (minor allele frequency of ≥1%, a Hardy–Weinberg equilibrium test not exceeding P = 1 × 10−15, a variant call rate above 99%, and LD pruned using a R2 threshold of 0.9 with a window size of 1,000 markers and a step size of 100 markers):
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Prep_Geno.sh
 
