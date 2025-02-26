@@ -9,9 +9,11 @@
 
 regenie \
 --step 2 \
---bed $1_qc1 \
+--bed $1 \
+--keep $1_qc1.id \
+--extract $1_qc1.snplist \
 --covarFile $2 \
---phenoFile $1_qc1.pheno \
+--phenoFile $1.pheno \
 --cc12 \
 --bsize 200 \
 --bt \
