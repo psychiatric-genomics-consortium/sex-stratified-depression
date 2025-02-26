@@ -1,5 +1,5 @@
 ## Script to run step 2 of regenie using imputed data for males in bfile format
-## This file should be run after running 5_regenie_Step1_MALE.sh and checking the .log file for any errors 
+## This file should be run after running 5_regenie_Step1_MALE.sh and checking the .log file for any errors
 
 ## usage:
 ## $ module load regenie
@@ -9,9 +9,11 @@
 
 regenie \
 --step 2 \
---bed $1_qc1_male \
+--bed $1 \
+--keep $1_qc1_male.id \
+--extract $1_qc1_male.snplist \
 --covarFile $2 \
---phenoFile $1_qc1_male.pheno \
+--phenoFile $1.pheno \
 --cc12 \
 --bsize 200 \
 --bt \
