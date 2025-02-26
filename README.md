@@ -18,7 +18,9 @@ If your data is already imputed then skip to the ‘Post-imputation Quality Cont
 Imputation should be performed using the ricopili pipeline:
 
 Manuscript - https://academic.oup.com/bioinformatics/article/36/3/930/5545088
+
 Website - https://sites.google.com/a/broadinstitute.org/ricopili/overview
+
 Tutorial - https://docs.google.com/document/d/1ux_FbwnvSzaiBVEwgS7eWJoYlnc_o0YHFb07SPQsYjI/edit?tab=t.0#heading=h.tkgxq8x9kt6n
 
 Imputation is a multi-stage process of pre-imputation quality control, PCA, and imputation. Analysts should familiarise themselves with the ricopili documentation shown above.  
@@ -126,7 +128,9 @@ Step 5 is to run the GWAS. There are three association analyses to be performed:
 If related individuals were removed in step 2 then run the following scripts to run the three GWAS in PLINK. You will need to update the --parameters line for the GxSex analysis to provide the correct values based on the number and position of your covariates, see sample code for details:
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh
+
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_FEMALE.sh
+
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh
 
 If you have relatedness in your sample or you are intending to use regenie for the GWAS then there are multiple stages to this analysis. Firstly, a genomic relationship matrix is created using the original genotyped variants. You need to create a single-column list of genotyped variants’ IDs for your data and save it in a file called genotypedvariants.txt with no header row in your working directory. Then running the following code will apply the required quality control (minor allele frequency of ≥1%, a Hardy–Weinberg equilibrium test not exceeding P = 1 × 10−15, a variant call rate above 99%, and LD pruned using a R2 threshold of 0.9 with a window size of 1,000 markers and a step size of 100 markers):
@@ -136,13 +140,17 @@ https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blo
 Then you need to run step1 of regenie:
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_GxSEX.sh
+
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_FEMALE.sh
+
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_MALE.sh
 
 followed by step 2 of regenie:
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_GxSEX.sh
+
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_FEMALE.sh
+
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_MALE.sh
 
 Please also prepare a readme file to accompany the summary statistics based on the description at the end of this document.
