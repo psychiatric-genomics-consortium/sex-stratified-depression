@@ -66,8 +66,20 @@ if (all(names(table(unlist(famPCA$pheno), useNA="ifany")) %in% 0:1) == TRUE) {
 ## output
 print(paste("Recommended PCs:",list(which(usePCA == 1)),"for whole sample"))
 
-## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
-write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+##load fam file
+famfile<-read.table(paste0(filename,".fam"),header=FALSE,sep="")
+
+## if both sexes present then include sex in covariate file
+if ((nrow(famfile[which(famfile$V5 == 1),]) > 0) & (nrow(famfile[which(famfile$V5 == 2),]) > 0)) {
+  colnames(famfile)[2]<-"IID"
+  colnames(famfile)[5]<-"sex"
+  famPCA<-merge(famPCA,famfile[,c(2,5)],by="IID")
+  ## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
+  write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),which(colnames(famPCA) == "sex"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+} else {
+  ## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
+  write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+}
 
 ## Males
 
