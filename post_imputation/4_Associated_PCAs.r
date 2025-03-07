@@ -143,7 +143,7 @@ if (all(names(table(unlist(malefamPCA$pheno), useNA="ifany")) %in% 0:1) == TRUE)
 print(paste("Recommended PCs:",list(which(maleusePCA == 1)),"for male only sample"))
 
 ## Output PCs 1-4 and those associated with pheno
-write.table(malefamPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(maleusePCA == 1)+2))],paste0(filename,"_qc1_male_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+write.table(malefamPCA[,c(which(colnames(malefamPCA) == "FID"),which(colnames(malefamPCA) == "IID"),(which(maleusePCA == 1)+2))],paste0(filename,"_qc1_male_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
 
 ## Females
 
@@ -207,4 +207,4 @@ if (all(names(table(unlist(femalefamPCA$pheno), useNA="ifany")) %in% 0:1) == TRU
 print(paste("Recommended PCs:",list(which(femaleusePCA == 1)),"for female only sample"))
 
 ## Output PCs 1-4 and those associated with pheno
-write.table(femalefamPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(femaleusePCA == 1)+2))],paste0(filename,"_qc1_female_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+write.table(femalefamPCA[,c(which(colnames(femalefamPCA) == "FID"),which(colnames(femalefamPCA) == "IID"),(which(femaleusePCA == 1)+2))],paste0(filename,"_qc1_female_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
