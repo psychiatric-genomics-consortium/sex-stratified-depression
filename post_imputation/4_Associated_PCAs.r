@@ -75,8 +75,9 @@ if ((nrow(famfile[which(famfile$V5 == 1),]) > 0) & (nrow(famfile[which(famfile$V
   colnames(famfile)[2]<-"IID"
   colnames(famfile)[5]<-"sex"
   famPCA<-merge(famPCA,famfile[,c(2,5)],by="IID")
-  ## Output: sex, PCs 1-4 and those associated with pheno
+  ## Output: sex, PCs 1-4 and those associated with pheno. Plus a covariate file without sex for use with X chromosome data
   write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),which(colnames(famPCA) == "sex"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+  write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA_forX.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
 } else {
   ## Output: PCs 1-4 and those associated with pheno
   write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
