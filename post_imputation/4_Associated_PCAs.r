@@ -24,6 +24,7 @@ if (file.exists(paste0(filename,"_qc1_pca.eigenvec")) == TRUE && file.exists(pas
   colnames(PCAfile)[1]<-"FID"
   # merge PCA and pheno file based on IID
   famPCA<-merge(PCAfile,phenofile[,c(2,3)],by.x="IID",by.y="V2")
+  famPCA$pheno<-as.numeric(famPCA$pheno)
 } else if (file.exists(paste0(filename,"_qc1_eigen.vec")) == TRUE) {
   ## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
   PCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_eigen.vec"))))
@@ -100,6 +101,7 @@ if (file.exists(paste0(filename,"_qc1_male_pca.eigenvec")) == TRUE && file.exist
   colnames(malePCAfile)[1]<-"FID"
   # merge fam and PCA file based on IID
   malefamPCA<-merge(malePCAfile,malephenofile[,c(2,3)],by.x="IID",by.y="V2")
+  malefamPCA$pheno<-as.numeric(malefamPCA$pheno)
 } else if (file.exists(paste0(filename,"_qc1_male_eigen.vec")) == TRUE) {
   ## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
   malePCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_male_eigen.vec"))))
@@ -164,6 +166,7 @@ if (file.exists(paste0(filename,"_qc1_female_pca.eigenvec")) == TRUE && file.exi
   colnames(femalePCAfile)[1]<-"FID"
   # merge fam and PCA file based on IID
   femalefamPCA<-merge(femalePCAfile,femalephenofile[,c(2,3)],by.x="IID",by.y="V2")
+  femalefamPCA$pheno<-as.numeric(femalefamPCA$pheno)
 } else if (file.exists(paste0(filename,"_qc1_female_eigen.vec")) == TRUE) {
   ## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
   femalePCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_female_eigen.vec"))))
