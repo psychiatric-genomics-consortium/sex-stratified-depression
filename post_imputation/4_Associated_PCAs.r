@@ -16,7 +16,7 @@ if (file.exists(paste0(filename,"_qc1_pca.eigenvec")) == TRUE && file.exists(pas
   print("Found PCs from both plink and eigensoft. Please rename or move the unwanted file")
   stop()
 } else if (file.exists(paste0(filename,"_qc1_pca.eigenvec")) == TRUE) {
-  ## If PCs are in plink format: ID, FID, PC1-PC20
+  ## If PCs are in plink format: IID, FID, PC1-PC20
   PCAfile<-read.table(paste0(filename,"_qc1_pca.eigenvec"),comment.char = '&',header=TRUE,sep="")
   # rename 3rd column in fam file as pheno
   colnames(phenofile)[3]<-"pheno"
@@ -28,7 +28,7 @@ if (file.exists(paste0(filename,"_qc1_pca.eigenvec")) == TRUE && file.exists(pas
   ## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
   PCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_eigen.vec"))))
   # rename columns in PCAfile and convert phenotype to binary. Id and FID switched to match the merge in other data format. This is switched back during write.table
-  colnames(PCAfile)<-c("IID","FID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
+  colnames(PCAfile)<-c("FID","IID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
   PCAfile$pheno[which(PCAfile$pheno == "Control")]<-0
   PCAfile$pheno[which(PCAfile$pheno == "Case")]<-1
   PCAfile$pheno<-as.numeric(PCAfile$pheno)
@@ -74,10 +74,10 @@ if ((nrow(famfile[which(famfile$V5 == 1),]) > 0) & (nrow(famfile[which(famfile$V
   colnames(famfile)[2]<-"IID"
   colnames(famfile)[5]<-"sex"
   famPCA<-merge(famPCA,famfile[,c(2,5)],by="IID")
-  ## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
+  ## Output: sex, PCs 1-4 and those associated with pheno
   write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),which(colnames(famPCA) == "sex"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
 } else {
-  ## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
+  ## Output: PCs 1-4 and those associated with pheno
   write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
 }
 
@@ -104,7 +104,7 @@ if (file.exists(paste0(filename,"_qc1_male_pca.eigenvec")) == TRUE && file.exist
   ## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
   malePCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_male_eigen.vec"))))
   # rename columns in PCAfile and convert phenotype to binary
-  colnames(malePCAfile)<-c("IID","FID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
+  colnames(malePCAfile)<-c("FID","IID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
   malePCAfile$pheno[which(malePCAfile$pheno == "Control")]<-0
   malePCAfile$pheno[which(malePCAfile$pheno == "Case")]<-1
   malePCAfile$pheno<-as.numeric(malePCAfile$pheno)
@@ -139,10 +139,10 @@ if (all(names(table(unlist(malefamPCA$pheno), useNA="ifany")) %in% 0:1) == TRUE)
   stop()
 }
 
-## output
+## screen output
 print(paste("Recommended PCs:",list(which(maleusePCA == 1)),"for male only sample"))
 
-## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
+## Output PCs 1-4 and those associated with pheno
 write.table(malefamPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(maleusePCA == 1)+2))],paste0(filename,"_qc1_male_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
 
 ## Females
@@ -168,7 +168,7 @@ if (file.exists(paste0(filename,"_qc1_female_pca.eigenvec")) == TRUE && file.exi
   ## If PCs are in eigensoft format. assuming format FID:ID, PCs 1-20, phenotype
   femalePCAfile<-read.table(text = gsub(":", " ", readLines(paste0(filename,"_qc1_female_eigen.vec"))))
   # rename columns in PCAfile and convert phenotype to binary
-  colnames(femalePCAfile)<-c("IID","FID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
+  colnames(femalePCAfile)<-c("FID","IID","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10","PC11","PC12","PC13","PC14","PC15","PC16","PC17","PC18","PC19","PC20","pheno")
   femalePCAfile$pheno[which(femalePCAfile$pheno == "Control")]<-0
   femalePCAfile$pheno[which(femalePCAfile$pheno == "Case")]<-1
   femalePCAfile$pheno<-as.numeric(femalePCAfile$pheno)
@@ -203,8 +203,8 @@ if (all(names(table(unlist(femalefamPCA$pheno), useNA="ifany")) %in% 0:1) == TRU
   stop()
 }
 
-## output
+## screen output
 print(paste("Recommended PCs:",list(which(femaleusePCA == 1)),"for female only sample"))
 
-## The merge causes IID and FID to switch places so reordered here and output along with PCs 1-4 and those associated with pheno
+## Output PCs 1-4 and those associated with pheno
 write.table(femalefamPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(femaleusePCA == 1)+2))],paste0(filename,"_qc1_female_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
