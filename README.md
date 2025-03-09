@@ -170,7 +170,7 @@ The XWAS software (https://github.com/KeinanLab/xwas-3.0) is recommended for the
 
 From your existing working directory clone the XWAS repository from Github using:
 
-```$ git clone https://github.com/KeinanLab/xwas-3.0.git```
+```git clone https://github.com/KeinanLab/xwas-3.0.git```
 
 #### Step 1
 
