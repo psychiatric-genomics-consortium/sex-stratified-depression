@@ -169,6 +169,7 @@ All sample code should be treated as a beta testing software release. All log an
 The XWAS software (https://github.com/KeinanLab/xwas-3.0) is recommended for the quality control and association analysis and a useful manual is available here: https://github.com/KeinanLab/xwas-3.0/blob/master/XWAS_manual_v3.0.pdf.
 
 From your existing working directory clone the XWAS repository from Github using:
+
 ```$ git clone https://github.com/KeinanLab/xwas-3.0.git```
 
 #### Step 1
