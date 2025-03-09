@@ -1,3 +1,10 @@
+## Script to run X chromosome analysis using the XWAS software
+
+## usage:
+## $ ./X2_XWAS.sh {filename} {covariatefilename}
+## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix. The {covariatefilename} is the full name of the file
+## containing the PCs identified as associated with depression using 4_Associated_PCAs.r along with age and any other relevant covariates
+
 ./xwas-3.0/bin/xwas \
 --bfile $1_final_x \
 --xwas \
@@ -25,7 +32,7 @@ awk '($9 < 0.05 )' $1_final_X_freqdiff.xtest | awk '{print $2}' > $1_final_X_fre
 --stouffers \
 --sex-diff \
 --pheno $1.pheno \
---covar $1_qc1_PCA_forX.covar \
+--covar $2 \
 --out $1_final_X_xwas
 
 ./xwas-3.0/bin/xwas \
@@ -40,5 +47,5 @@ awk '($9 < 0.05 )' $1_final_X_freqdiff.xtest | awk '{print $2}' > $1_final_X_fre
 --stouffers \
 --sex-diff \
 --pheno $1.pheno \
---covar $1_qc1_PCA_forX.covar \
+--covar $2 \
 --out $1_final_X_model2
