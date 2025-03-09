@@ -9,9 +9,7 @@ Where possible, we will use XWAS to move beyond autosomal differences to investi
 
 All results found here cannot be share, discussed, or presented in any way without explicit permission from Joel Gelernter, Dan Levey, Murray Stein, or David Howard.
 
-## Project overview
-
-### Imputation
+## Imputation
 
 If your data is already imputed then skip to the ‘Post-imputation Quality Control’, although the tools, reference panels, and parameters used for imputation should be reported to the lead authors.
 
@@ -35,8 +33,8 @@ The imputed data should be converted to best guess/hard called genotypes with va
 
 If you have X chromosome data, then the imputation should be conducted separately for males and females and follow the guidance provided here: https://docs.google.com/document/d/1qeQFfvqNI2Lkp6XCYXmnGoEL3f9LRPJcMpwRk0rnJf4/edit?tab=t.0#heading=h.eti7izkzx2ko
 
-### Post Imputation Steps 
-#### Autosomal chromosomes
+## Post Imputation Steps 
+### Autosomal chromosomes
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
@@ -157,7 +155,7 @@ https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blo
 
 Please also prepare a readme file to accompany the summary statistics based on the description at the end of this document.
 
-#### X chromosome
+### X chromosome
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
