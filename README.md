@@ -316,6 +316,7 @@ Prepare a plaintext file with analyst and study information called COHORT[-SUBCO
 * [eigensoft](https://github.com/DReichLab/EIG)
 * [R](https://www.r-project.org/)
 * [regenie](https://rgcgithub.github.io/regenie/options/)
+* [XWAS](https://github.com/KeinanLab/xwas-3.0)
 
 ## Lead Analysts
 
