@@ -52,9 +52,9 @@ cd SexStratAnalysis
 Next set up symbolic links to your imputed genome-wide data:
 
 ```
-ln -s {path to your .bed file} {filename.bed}
-ln -s {path to your .bim file} {filename.bim}
-ln -s {path to your .fam file} {filename.fam}
+ln -s path_to_your_bed_file filename.bed
+ln -s path_to_your_bim_file filename.bim
+ln -s path_to_your_fam_file filename.fam
 ```
 
 and then clone the sample code repository using:
