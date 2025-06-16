@@ -58,7 +58,7 @@ ln -s {path to your .fam file} {filename.fam}
 git clone https://github.com/psychiatric-genomics-consortium/sex-stratified-depression.git
 ```
 
-A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is expected in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression). If your depression phenotype is also in column six of the fam file and you plan to use PLINK for the GWAS, you will need to delete the lines starting --pheno from the GWAS scripts in step 5, otherwise the GWAS will be performed twice with two identical outputs.
+A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression). If your depression phenotype is also in column six of the fam file and you plan to use PLINK for the GWAS, you will need to delete the lines starting --pheno from the GWAS scripts in step 5, otherwise the GWAS will be performed twice with two identical outputs.
 
 The sample code assumes that all software can be loaded using ```module load {software}```. You can use ```module spider {software}``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
 
@@ -67,11 +67,30 @@ All sample code should be treated as a beta testing software release. All log an
 The schematic below illustrates the pipeline and sample code available in the post-imputation folder: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation
 
 ```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+stateDiagram-v2
+ state anc <<join>>
+ state rel2 <<join>>
+ state rel <<join>>
+ [*] --> 1_Relatedness.sh : Determine relatedness with
+ 1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
+ 1_Relatedness.sh --> 2_QC_for_regenie_GWAS.sh : If > 10% related use
+ 2_QC_for_PLINK_GWAS.sh --> anc
+ 2_QC_for_regenie_GWAS.sh --> anc
+ anc --> 3_Create_Single_Ancestry_PCAs.sh : If single ancestry use
+ anc --> 3_Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
+ 3_Create_Single_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
+ 3_Create_Multi_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
+ 4_Associated_PCAs.r --> 5_regenie_Prep_Geno.sh : If used 2_QC_for_regenie_GWAS.sh
+ 4_Associated_PCAs.r --> rel : If used 2_QC_for_PLINK_GWAS.sh
+ rel --> 5_PLINK_GWAS_FEMALE.sh
+ rel --> 5_PLINK_GWAS_MALE.sh
+ rel --> 5_PLINK_GWAS_GxSEX.sh
+ 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_FEMALE.sh
+ 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_MALE.sh
+ 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_GxSEX.sh
+ 5_regenie_Step1_FEMALE.sh --> 5_regenie_Step2_FEMALE.sh
+ 5_regenie_Step1_MALE.sh --> 5_regenie_Step2_MALE.sh
+ 5_regenie_Step1_GxSEX.sh --> 5_regenie_Step2_GxSEX.sh 
 ```
  
 #### Step 1
