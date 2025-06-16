@@ -42,7 +42,7 @@ We have prepared sample code using PLINK2, regenie, eigensoft, and R for the rem
 
 The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. 
 
-It is advisable to create a working directory for the analysis and then move to that directory:
+It is advisable to create a working directory for the analysis and then move into that directory:
 
 ```
 mkdir SexStratAnalysis
