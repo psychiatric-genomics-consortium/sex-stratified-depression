@@ -5,7 +5,7 @@ The goals of this research are to investigate sex specific risk loci for Major D
 
 Where possible, we will use XWAS to move beyond autosomal differences to investigate the X chromosome in genotyped samples with available data. LDSC will be used to calculate heritabilities and phenome-wide comparative genetic correlation between sex stratified analyses.  MAGMA will be used to investigate tissue enrichments. We will calculate and compare effect sizes at discovered loci as well as heritability and genetic correlations. 
 
-## Embargo
+### Embargo
 
 All results cannot be share, discussed, or presented in any way without explicit permission from Joel Gelernter, Dan Levey, Murray Stein, or David Howard.
 
@@ -49,12 +49,16 @@ mkdir SexStratAnalysis
 cd SexStratAnalysis
 ```
 
-Next set up symbolic links to your imputed genome-wide data and clone the sample code repository using:
+Next set up symbolic links to your imputed genome-wide data:
 
 ```
 ln -s {path to your .bed file} {filename.bed}
 ln -s {path to your .bim file} {filename.bim}
 ln -s {path to your .fam file} {filename.fam}
+```
+
+and then clone the sample code repository using:
+```
 git clone https://github.com/psychiatric-genomics-consortium/sex-stratified-depression.git
 ```
 
@@ -74,9 +78,9 @@ Step 1 is to examine your data to determine the proportion of second-degree rela
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh
 
-To identify the proportion of relatives you will need to compare the number of individuals written to *king.cutoff.out.id with the number of individuals in the fam file. Note that’s the *king.cutoff.out.id contains a header row so you will need to subtract 1 if you use wc -l * king.cutoff.out.id to count the number of rows.
+To identify the proportion of relatives you will need to compare the number of individuals written to *king.cutoff.out.id with the number of individuals in the fam file. Note that’s the *king.cutoff.out.id contains a header row so you will need to subtract 1 if you use ```wc -l * king.cutoff.out.id``` to count the number of rows.
 
-If the proportion of related individuals is less than or equal to 10% of the whole sample, then you can opt to remove them and run the GWAS using PLINK. If your sample contains more than 10% related individuals, then regenie is the preferred way to conduct the GWAS. You can also opt to use regenie regardless of the relatedness in your sample.
+If the proportion of related individuals is less than or equal to 10% of the whole sample, then you can opt to remove them and run the GWAS using PLINK. If your sample contains more than 10% related individuals, then regenie is the preferred way to conduct the GWAS. You can also opt to use regenie regardless of the relatedness in your sample thereby keeping all samples.
 
 #### Step 2
 
