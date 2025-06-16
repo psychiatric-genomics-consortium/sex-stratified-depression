@@ -66,32 +66,7 @@ All sample code should be treated as a beta testing software release. All log an
 
 The schematic below illustrates the pipeline and sample code available in the post-imputation folder: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation
 
-```mermaid
-stateDiagram-v2
- state anc <<join>>
- state rel2 <<join>>
- state rel <<join>>
- [*] --> 1_Relatedness.sh : Determine relatedness with
- 1_Relatedness.sh --> 2_QC_for_PLINK_GWAS.sh : If <= 10% related use
- 1_Relatedness.sh --> 2_QC_for_regenie_GWAS.sh : If > 10% related use
- 2_QC_for_PLINK_GWAS.sh --> anc
- 2_QC_for_regenie_GWAS.sh --> anc
- anc --> 3_Create_Single_Ancestry_PCAs.sh : If single ancestry use
- anc --> 3_Create_Multi_Ancestry_PCAs.sh : If multi ancestry use
- 3_Create_Single_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
- 3_Create_Multi_Ancestry_PCAs.sh --> 4_Associated_PCAs.r
- 4_Associated_PCAs.r --> 5_regenie_Prep_Geno.sh : If used 2_QC_for_regenie_GWAS.sh
- 4_Associated_PCAs.r --> rel : If used 2_QC_for_PLINK_GWAS.sh
- rel --> 5_PLINK_GWAS_FEMALE.sh
- rel --> 5_PLINK_GWAS_MALE.sh
- rel --> 5_PLINK_GWAS_GxSEX.sh
- 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_FEMALE.sh
- 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_MALE.sh
- 5_regenie_Prep_Geno.sh --> 5_regenie_Step1_GxSEX.sh
- 5_regenie_Step1_FEMALE.sh --> 5_regenie_Step2_FEMALE.sh
- 5_regenie_Step1_MALE.sh --> 5_regenie_Step2_MALE.sh
- 5_regenie_Step1_GxSEX.sh --> 5_regenie_Step2_GxSEX.sh 
-```
+![Image](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/pipeline.png)
  
 #### Step 1
 
