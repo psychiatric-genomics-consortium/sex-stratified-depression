@@ -7,7 +7,7 @@ Where possible, we will use XWAS to move beyond autosomal differences to investi
 
 ### Embargo
 
-All results cannot be share, discussed, or presented in any way without explicit permission from Joel Gelernter, Dan Levey, Murray Stein, or David Howard.
+All results cannot be shared, discussed, or presented in any way without explicit permission from Joel Gelernter, Dan Levey, Murray Stein, or David Howard.
 
 ## Imputation
 
