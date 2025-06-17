@@ -13,13 +13,13 @@ Results cannot be shared, presented, or published in any way without explicit pe
 
 If your data is already imputed then skip to the ‘Post-imputation Quality Control’, although the tools, reference panels, and parameters used for imputation should be reported to the lead authors.
 
-Imputation should be performed using the ricopili pipeline:
+Imputation should be performed using the ricopili pipeline. See below for instructions: 
 
-Manuscript - https://academic.oup.com/bioinformatics/article/36/3/930/5545088
+[Website](https://sites.google.com/a/broadinstitute.org/ricopili/overview)
 
-Website - https://sites.google.com/a/broadinstitute.org/ricopili/overview
+[Tutorial](https://docs.google.com/document/d/1ux_FbwnvSzaiBVEwgS7eWJoYlnc_o0YHFb07SPQsYjI/edit?tab=t.0#heading=h.tkgxq8x9kt6n)
 
-Tutorial - https://docs.google.com/document/d/1ux_FbwnvSzaiBVEwgS7eWJoYlnc_o0YHFb07SPQsYjI/edit?tab=t.0#heading=h.tkgxq8x9kt6n
+[Manuscript](https://academic.oup.com/bioinformatics/article/36/3/930/5545088)
 
 Imputation is a multi-stage process of pre-imputation quality control, PCA, and imputation. Analysts should familiarise themselves with the ricopili documentation shown above.  
 
@@ -31,7 +31,7 @@ To conduct the imputation, the largest reference panel suitable for the ancestry
 
 The imputed data should be converted to best guess/hard called genotypes with variants with an imputation accuracy (INFO) score less than 0.6 removed.
 
-If you have X chromosome data, then the imputation should be conducted separately for males and females and follow the guidance provided here: https://docs.google.com/document/d/1qeQFfvqNI2Lkp6XCYXmnGoEL3f9LRPJcMpwRk0rnJf4/edit?tab=t.0#heading=h.eti7izkzx2ko
+If you have X chromosome data, then the imputation should be conducted separately for males and females and follow the guidance provided [here](https://docs.google.com/document/d/1qeQFfvqNI2Lkp6XCYXmnGoEL3f9LRPJcMpwRk0rnJf4/edit?tab=t.0#heading=h.eti7izkzx2ko)
 
 ## Post Imputation Steps
 ### Autosomal chromosomes
@@ -68,15 +68,18 @@ The sample code assumes that all software can be loaded using ```module load {so
 
 All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data. 
 
-The schematic below illustrates the pipeline and sample code available in the post-imputation folder: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation
+The schematic below illustrates the analysis pipeline:
 
 ![Image](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/pipeline.png)
  
 #### Step 1
 
-Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be done using:
+Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be performed using the [1_Relatedness.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh) sample code by running:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh
+```
+module load plink2
+./sex-stratified-depression/post_imputation/1_Relatedness.sh filename
+```
 
 To identify the proportion of relatives you will need to compare the number of individuals written to *king.cutoff.out.id with the number of individuals in the fam file. Note that’s the *king.cutoff.out.id contains a header row so you will need to subtract 1 if you use ```wc -l * king.cutoff.out.id``` to count the number of rows.
 
