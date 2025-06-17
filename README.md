@@ -38,7 +38,7 @@ If you have X chromosome data, then the imputation should be conducted separatel
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-We have prepared sample code using PLINK2, regenie, eigensoft, and R for the remaining steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. 
+We have prepared sample code using PLINK2, regenie, eigensoft, and R for the remaining steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. The guidance below assumes you will have launched an interactive session to run each sample code.
 
 The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. 
 
