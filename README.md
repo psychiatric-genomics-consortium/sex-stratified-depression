@@ -42,6 +42,10 @@ We have prepared sample code using PLINK2, regenie, eigensoft, and R for the rem
 
 The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. 
 
+The sample code assumes that all software can be loaded using ```module load {software}```. You can use ```module spider {software}``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
+
+All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
+
 It is advisable to create a working directory for the analysis and then move into that directory:
 
 ```
@@ -64,10 +68,6 @@ git clone https://github.com/psychiatric-genomics-consortium/sex-stratified-depr
 
 A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression). If your depression phenotype is also in column six of the fam file and you plan to use PLINK for the GWAS, you will need to delete the lines starting --pheno from the GWAS scripts in step 5, otherwise the GWAS will be performed twice with two identical outputs.
 
-The sample code assumes that all software can be loaded using ```module load {software}```. You can use ```module spider {software}``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
-
-All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data. 
-
 The schematic below illustrates the analysis pipeline:
 
 ![Image](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/pipeline.png)
@@ -87,15 +87,21 @@ If the proportion of related individuals is less than or equal to 10% of the who
 
 #### Step 2
 
-Step 2 is to apply quality control to prepare the data for either a PLINK (removing relatives) or a regenie GWAS (not removing relatives). The quality control removes individuals that aren’t phenotyped, don’t have a recoded sex or have an individual call rate less than 10%. Variants are removed which have a minor allele frequency < 0.005, have a variant call rate less than 10%, that are out of Hardy-Weinberg equilibrium with _P_ < 10<sup>-6</sup>, or that aren’t biallelic. Two additional subsamples are also created: one for males only and one for females only with the quality control applied to each of those subsamples.
+Step 2 is to apply quality control to prepare the data for either a PLINK (removing relatives) or a regenie GWAS (not removing relatives). The quality control removes individuals that aren’t phenotyped, don’t have a recoded sex or have an individual call rate less than 10%. Variants are removed which have a minor allele frequency < 0.005, have a variant call rate less than 10%, that are out of Hardy-Weinberg equilibrium with _P_ < 10<sup>-6</sup>, or that aren’t biallelic. Two additional subsamples are also created: one for males only and one for females only with the quality control applied to each of those subsamples. 
 
-To prepare for a PLINK GWAS use:
+To prepare for a PLINK GWAS use [2_QC_for_PLINK_GWAS.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_PLINK_GWAS.sh) by running:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_PLINK_GWAS.sh
+```
+module load plink2
+./sex-stratified-depression/post_imputation/2_QC_for_PLINK_GWAS.sh filename
+```
 
-or to prepare for a regenie GWAS use:
+**or** to prepare for a regenie GWAS use [2_QC_for_regenie_GWAS.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_regenie_GWAS.sh) by running:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_regenie_GWAS.sh
+```
+module load plink2
+./sex-stratified-depression/post_imputation/2_QC_for_regenie_GWAS.sh filename
+```
 
 #### Step 3
 
