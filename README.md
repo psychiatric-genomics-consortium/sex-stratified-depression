@@ -7,7 +7,7 @@ Where possible, we will use XWAS to move beyond autosomal differences to investi
 
 ### Embargo
 
-All results cannot be shared, discussed, or presented in any way without explicit permission from Joel Gelernter, Dan Levey, Murray Stein, or David Howard.
+Results cannot be shared, presented, or published in any way without explicit permission from Joel Gelernter, Dan Levey, Murray Stein, or David Howard.
 
 ## Imputation
 
@@ -84,7 +84,7 @@ If the proportion of related individuals is less than or equal to 10% of the who
 
 #### Step 2
 
-Step 2 is to apply quality control to prepare the data for either a PLINK (removing relatives) or a regenie GWAS (not removing relatives). The quality control removes individuals that aren’t phenotyped, don’t have a recoded sex or have an individual call rate less than 10%. Variants are removed which have a minor allele frequency < 0.005, have a variant call rate less than 10%, that are out of Hardy-Weinberg equilibrium with p < 10-6, or that aren’t biallelic. Two additional subsamples are also created: one for males only and one for females only with the quality control applied to each of those subsamples.
+Step 2 is to apply quality control to prepare the data for either a PLINK (removing relatives) or a regenie GWAS (not removing relatives). The quality control removes individuals that aren’t phenotyped, don’t have a recoded sex or have an individual call rate less than 10%. Variants are removed which have a minor allele frequency < 0.005, have a variant call rate less than 10%, that are out of Hardy-Weinberg equilibrium with _P_ < 10<sup>-6</sup>, or that aren’t biallelic. Two additional subsamples are also created: one for males only and one for females only with the quality control applied to each of those subsamples.
 
 To prepare for a PLINK GWAS use:
 
@@ -320,6 +320,7 @@ Prepare a plaintext file with analyst and study information called COHORT[-SUBCO
 * **Dan Levey** - *analyst* - [PGC](https://med.unc.edu/pgc)
 * **Murray Stein** - *analyst* - [PGC](https://med.unc.edu/pgc)
 * **Mark Adams** - *analyst* - [PGC](https://med.unc.edu/pgc)
+* **Alexandre Lussier** - *analyst* - [PGC](https://med.unc.edu/pgc)
 
 ## License
 
