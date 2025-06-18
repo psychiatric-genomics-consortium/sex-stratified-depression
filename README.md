@@ -11,7 +11,7 @@ Results cannot be shared, presented, or published in any way without explicit pe
 
 ## Imputation
 
-If your data is already imputed then skip to the ‘Post-imputation Quality Control’, although the tools, reference panels, and parameters used for imputation should be reported to the lead authors.
+If your data is already imputed then skip to the [Post Imputation Steps](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#post-imputation-steps), although the tools, reference panels, and parameters used for imputation should be reported to the lead authors.
 
 Imputation should be performed using the ricopili pipeline. See below for instructions: 
 
@@ -96,7 +96,7 @@ module load plink2
 ./sex-stratified-depression/post_imputation/2_QC_for_PLINK_GWAS.sh filename
 ```
 
-**or** to prepare for a regenie GWAS use [2_QC_for_regenie_GWAS.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_regenie_GWAS.sh) by running:
+**OR** to prepare for a regenie GWAS use [2_QC_for_regenie_GWAS.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/2_QC_for_regenie_GWAS.sh) by running:
 
 ```
 module load plink2
@@ -105,15 +105,22 @@ module load plink2
 
 #### Step 3
 
-Step 3 is to obtain the first 20 genetic principal components (PCs). If the ricopili pipeline was used, these PCs are created during the ‘pca’ module and stored in pacer_{filename}/{filename.menv.mvs} and these can be used. If you don’t have access to these PCs or didn’t use ricopili, then the PCs can be created using the scripts below. If your data was obtained from a single ancestry, then PLINK can be used. If your data contains individuals from multiple ancestries, then eigensoft is recommended. The PCs are created from SNPs that are in linkage equilibrium (using 200kb window and r2 threshold of 0.5), have a minor allele frequency > 0.05, and are not located in high LD regions (based on https://github.com/gabraham/flashpca/blob/master/exclusion_regions_hg19.txt).
+Step 3 is to obtain the first 20 genetic principal components (PCs). If the ricopili pipeline was used, these PCs are created during the ‘pca’ module and stored in pacer_{filename}/{filename.menv.mvs} and these can be used. If you don’t have access to these PCs or didn’t use ricopili, then the PCs can be created below. If your data was obtained from a single ancestry, then PLINK can be used. If your data contains individuals from multiple ancestries, then eigensoft is recommended. The PCs are created from SNPs that are in linkage equilibrium (using 200kb window and r2 threshold of 0.5), have a minor allele frequency > 0.05, and are not located in high LD regions (based on https://github.com/gabraham/flashpca/blob/master/exclusion_regions_hg19.txt).
 
-To create PCs for a single ancestry cohort use:
+To create PCs for a single ancestry cohort use [3_Create_Single_Ancestry_PCAs.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/3_Create_Single_Ancestry_PCAs.sh) by running:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/3_Create_Single_Ancestry_PCAs.sh
+```
+module load plink2
+./sex-stratified-depression/post_imputation/3_Create_Single_Ancestry_PCAs.sh filename
+```
 
-or to create PCs for a multi ancestry cohort use:
+**OR** to create PCs for a multi ancestry cohort use [3_Create_Multi_Ancestry_PCAs.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/3_Create_Multi_Ancestry_PCAs.sh) by running:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/3_Create_Multi_Ancestry_PCAs.sh
+```
+module load plink2
+module load eigensoft
+./sex-stratified-depression/post_imputation/3_Create_Multi_Ancestry_PCAs.sh filename
+```
 
 #### Step 4
 
