@@ -34,6 +34,7 @@ plink2 \
 --out $1_qc1_eigen
 
 echo "Independent SNPs identified in full sample"
+echo "Converting to eigenstrat format"
 
 ## copy .pedind file from .fam file
 cp $1_qc1_eigen.fam $1_qc1_eigen.pedind
@@ -101,6 +102,7 @@ plink2 \
 --out $1_qc1_female_eigen
 
 echo "Independent SNPs identified in female sample"
+echo "Converting to eigenstrat format"
 
 ## copy .pedind file from .fam file
 cp $1_qc1_female_eigen.fam $1_qc1_female_eigen.pedind
@@ -168,6 +170,7 @@ plink2 \
 --out $1_qc1_male_eigen
 
 echo "Independent SNPs identified in male sample"
+echo "Converting to eigenstrat format"
 
 ## copy .pedind file from .fam file
 cp $1_qc1_male_eigen.fam $1_qc1_male_eigen.pedind
