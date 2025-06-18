@@ -2,7 +2,7 @@
 
 ## usage:
 ## $ module load plink2
-## $ module load eigensoft.sh
+## $ module load eigensoft
 ## $ ./3_Create_Multi_Ancestry_PCAs.sh {filename}
 ## * note {filename} is the original name of your data without the _qc1 and .bed/.bim/.fam suffix
 
