@@ -33,6 +33,8 @@ plink2 \
 --make-bed \
 --out $1_qc1_eigen
 
+echo "Independent SNPs identified in full sample"
+
 ## copy .pedind file from .fam file
 cp $1_qc1_eigen.fam $1_qc1_eigen.pedind
 
@@ -57,6 +59,8 @@ echo "evecoutname: "$1"_qc1_eigen.vec" >> par.file2
 echo "evaloutname: "$1"_qc1_eigen.val" >> par.file2
 echo "numoutevec: 20" >> par.file2
 
+echo "Calculating PCAs for full sample"
+
 ## Create PCs with smartpca
 smartpca -p par.file2 > $1_qc1_eigen_smartpca.log 2>&1
 
@@ -70,6 +74,8 @@ rm $1_qc1_eigen.ind
 rm $1_qc1_eigen.geno
 rm par.file
 rm par.file2
+
+echo "PCAs for full sample complete"
 
 ## Females
 
@@ -93,6 +99,8 @@ plink2 \
 --pheno $1.pheno \
 --make-bed \
 --out $1_qc1_female_eigen
+
+echo "Independent SNPs identified in female sample"
 
 ## copy .pedind file from .fam file
 cp $1_qc1_female_eigen.fam $1_qc1_female_eigen.pedind
@@ -118,6 +126,8 @@ echo "evecoutname: "$1"_qc1_female_eigen.vec" >> par.female.file2
 echo "evaloutname: "$1"_qc1_female_eigen.val" >> par.female.file2
 echo "numoutevec: 20" >> par.female.file2
 
+echo "Calculating PCAs for female sample"
+
 ## Create female PCs with smartpca
 smartpca -p par.female.file2 > $1_qc1_female_eigen_smartpca.log 2>&1
 
@@ -131,6 +141,8 @@ rm $1_qc1_female_eigen.ind
 rm $1_qc1_female_eigen.geno
 rm par.female.file
 rm par.female.file2
+
+echo "PCAs for female sample complete"
 
 ## Males
 
@@ -154,6 +166,8 @@ plink2 \
 --pheno $1.pheno \
 --make-bed \
 --out $1_qc1_male_eigen
+
+echo "Independent SNPs identified in male sample"
 
 ## copy .pedind file from .fam file
 cp $1_qc1_male_eigen.fam $1_qc1_male_eigen.pedind
@@ -179,6 +193,8 @@ echo "evecoutname: "$1"_qc1_male_eigen.vec" >> par.male.file2
 echo "evaloutname: "$1"_qc1_male_eigen.val" >> par.male.file2
 echo "numoutevec: 20" >> par.male.file2
 
+echo "Calculating PCAs for male sample"
+
 ## Create male PCs with smartpca
 smartpca -p par.male.file2 > $1_qc1_male_eigen_smartpca.log 2>&1
 
@@ -192,3 +208,5 @@ rm $1_qc1_male_eigen.ind
 rm $1_qc1_male_eigen.geno
 rm par.male.file
 rm par.male.file2
+
+echo "PCAs for male sample complete"
