@@ -65,7 +65,7 @@ if (all(names(table(unlist(famPCA$pheno), useNA="ifany")) %in% 0:1) == TRUE) {
 }
 
 ## output
-print(paste("Recommended PCs:",list(which(usePCA == 1)),"for whole sample"))
+cat(noquote(paste("Recommended PCs:",list(which(usePCA == 1)),"for whole sample \n")))
 
 ##load fam file
 famfile<-read.table(paste0(filename,".fam"),header=FALSE,sep="")
@@ -78,6 +78,9 @@ if ((nrow(famfile[which(famfile$V5 == 1),]) > 0) & (nrow(famfile[which(famfile$V
   ## Output: sex, PCs 1-4 and those associated with pheno. Plus a covariate file without sex for use with X chromosome data
   write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),which(colnames(famPCA) == "sex"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
   write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA_forX.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+  cat(noquote(paste0("Sex and PCA covariates written to ",filename,"_qc1_PCA.covar \n")))
+  cat(noquote(paste0("PCA covariates written to ",filename,"_qc1_PCA_forX.covar \n")))
+
 } else {
   ## Output: PCs 1-4 and those associated with pheno
   write.table(famPCA[,c(which(colnames(famPCA) == "FID"),which(colnames(famPCA) == "IID"),(which(usePCA == 1)+2))],paste0(filename,"_qc1_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
