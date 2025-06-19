@@ -149,7 +149,7 @@ if (all(names(table(unlist(malefamPCA$pheno), useNA="ifany")) %in% 0:1) == TRUE)
 
 ## screen output
 cat(noquote(paste0("\n")))
-cat(noquote("Recommended PCs:",list(which(maleusePCA == 1)),"for male only sample \n")))
+cat(noquote(paste("Recommended PCs:",list(which(maleusePCA == 1)),"for male only sample \n")))
 
 ## Output PCs 1-4 and those associated with pheno
 write.table(malefamPCA[,c(which(colnames(malefamPCA) == "FID"),which(colnames(malefamPCA) == "IID"),(which(maleusePCA == 1)+2))],paste0(filename,"_qc1_male_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
