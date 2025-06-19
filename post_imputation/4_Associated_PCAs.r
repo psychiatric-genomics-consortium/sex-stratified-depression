@@ -10,7 +10,13 @@ filename <- args[1]
 cat(noquote(paste0("\n")))
 
 # load pheno file assuming pheno is in column 3
-phenofile<-read.table(paste0(filename,".pheno"),header=FALSE,sep="")
+
+if (file.exists(paste0(filename,".pheno")) == TRUE) {
+  phenofile<-read.table(paste0(filename,".pheno"),header=FALSE,sep="")
+} else {
+  print("Phenotype file not found. See https://github.com/psychiatric-genomics-consortium/sex-stratified-depression for guidance")
+  stop()
+}
 
 ## Check whether PCs are from plink or eigensoft and prepare accordingly
 ## If both files exist then stop and prompt for change to file name or location
