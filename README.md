@@ -131,7 +131,7 @@ module load r
 ./sex-stratified-depression/post_imputation/4_Associated_PCAs.r filename
 ```
 
-It is then down to the analyst to prepare a final covariate file, combining these PCs with any other appropriate covariates for their cohort, such as age, genotyping batch, etc. The covariates should have a header row, with the first two columns containing FID and IID, with the remaining columns containing the associated PCs and any other covariates. The name of the final covariate file should be the same as the one created above. For the whole sample genotype-by-sex interaction analysis, sex (1 = male, 2 = female) is automatically added based on column 5 in the .fam file. Sex shouldn't be included in the other (male only, female only, and X chromosome) covariate files. 
+It is then down to the analyst to prepare a final covariate file, combining these PCs with any other appropriate covariates for their cohort, such as age, genotyping batch, etc. The covariates should have a header row, with the first two columns containing FID and IID, with the remaining columns containing the associated PCs and any other covariates. The name of the final covariate file should be the same as the one created above. For the whole sample genotype-by-sex interaction analysis, sex (1 = male, 2 = female) is automatically added as a covariate based on column 5 in the .fam file. Sex shouldn't be included in the other (male only, female only, and X chromosome) covariate files. 
 
 #### Step 5
 
