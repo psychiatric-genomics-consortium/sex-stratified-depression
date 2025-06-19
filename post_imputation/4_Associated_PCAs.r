@@ -7,6 +7,8 @@
 args <- commandArgs(trailingOnly = TRUE)
 filename <- args[1]
 
+cat(noquote(paste0("\n")))
+
 # load pheno file assuming pheno is in column 3
 phenofile<-read.table(paste0(filename,".pheno"),header=FALSE,sep="")
 
@@ -146,10 +148,12 @@ if (all(names(table(unlist(malefamPCA$pheno), useNA="ifany")) %in% 0:1) == TRUE)
 }
 
 ## screen output
-print(paste("Recommended PCs:",list(which(maleusePCA == 1)),"for male only sample"))
+cat(noquote(paste0("\n")))
+cat(noquote("Recommended PCs:",list(which(maleusePCA == 1)),"for male only sample \n")))
 
 ## Output PCs 1-4 and those associated with pheno
 write.table(malefamPCA[,c(which(colnames(malefamPCA) == "FID"),which(colnames(malefamPCA) == "IID"),(which(maleusePCA == 1)+2))],paste0(filename,"_qc1_male_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+cat(noquote(paste0("Male PCA covariates written to ",filename,"_qc1_male_PCA.covar \n")))
 
 ## Females
 
@@ -211,7 +215,9 @@ if (all(names(table(unlist(femalefamPCA$pheno), useNA="ifany")) %in% 0:1) == TRU
 }
 
 ## screen output
-print(paste("Recommended PCs:",list(which(femaleusePCA == 1)),"for female only sample"))
+cat(noquote(paste0("\n")))
+cat(noquote(paste("Recommended PCs:",list(which(femaleusePCA == 1)),"for female only sample \n")))
 
 ## Output PCs 1-4 and those associated with pheno
 write.table(femalefamPCA[,c(which(colnames(femalefamPCA) == "FID"),which(colnames(femalefamPCA) == "IID"),(which(femaleusePCA == 1)+2))],paste0(filename,"_qc1_female_PCA.covar"),col.names=TRUE,row.names=FALSE,sep=" ",quote=FALSE)
+cat(noquote(paste0("Female PCA covariates written to ",filename,"_qc1_female_PCA.covar \n")))
