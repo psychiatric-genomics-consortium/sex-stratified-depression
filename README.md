@@ -124,11 +124,14 @@ module load eigensoft
 
 #### Step 4
 
-Step 4 is to determine the PCs that will be included as covariates in the GWAS. The first 4 PCs and thereafter each component nominally associated (p<0.05) with case-control status should be included. A logistic regression of depression status on each component in turn should be used to determine an association and this can be achieved using the following R code:
+Step 4 is to determine the PCs that will be included as covariates in the GWAS. The first 4 PCs and thereafter each component nominally associated (_P_ < 0.05) with case-control status should be included. A logistic regression of depression status on each component in turn should be used to determine an association and this can be achieved using the [4_Associated_PCAs.r](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/4_Associated_PCAs.r) R code by running:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/4_Associated_PCAs.r
+```
+module load r
+./sex-stratified-depression/post_imputation/4_Associated_PCAs.r filename
+```
 
-It is then down to the analyst to prepare a covariate file combining these PCs with other appropriate covariates for each analysis, such as age, genotyping batch, etc. The covariates should have a header row, with the first two columns containing FID and IID, with the remaining columns containing the associated PCs and any other covariates. For the whole sample genotype-by-sex interaction analysis, sex (1 = male, 2 = female) is automatically added based on column 5 in the .fam file.
+It is then down to the analyst to prepare a final covariate file, combining these PCs with any other appropriate covariates for their cohort, such as age, genotyping batch, etc. The covariates should have a header row, with the first two columns containing FID and IID, with the remaining columns containing the associated PCs and any other covariates. The name of the final covariate file should be the same as the one created above. For the whole sample genotype-by-sex interaction analysis, sex (1 = male, 2 = female) is automatically added based on column 5 in the .fam file.
 
 #### Step 5
 
