@@ -66,7 +66,7 @@ and then clone the sample code repository using:
 git clone https://github.com/psychiatric-genomics-consortium/sex-stratified-depression.git
 ```
 
-A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression). If your depression phenotype is also in column six of the fam file and you plan to use PLINK for the GWAS, you will need to delete the lines starting --pheno from the GWAS scripts in step 5, otherwise the GWAS will be performed twice with two identical outputs.
+A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression).
 
 The schematic below illustrates the analysis pipeline:
 
@@ -139,7 +139,7 @@ Step 5 is to run the GWAS. There are three association analyses to be performed:
 
 Option 1 - **PLINK**
 
-If related individuals were removed in step 2, then run [5_PLINK_GWAS_GxSEX.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh), [5_PLINK_GWAS_FEMALE.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_FEMALE.sh), and [5_PLINK_GWAS_MALE.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh) using the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4, then you will only need to update the filename prefix. For the GxSEX analysis, you will also need to add which number covariate sex is, excluding the FID and IID columns. So if the first line of your covariate file is FID, IID, age, batch, sex, PC1, PC2, etc. then you would update covariate_sex_number below to 3.
+If related individuals were removed in step 2, then run [5_PLINK_GWAS_GxSEX.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh), [5_PLINK_GWAS_FEMALE.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_FEMALE.sh), and [5_PLINK_GWAS_MALE.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh) using the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4, then you will only need to update the filename prefix. For the GxSEX analysis, you will also need to add which number covariate sex is, excluding the FID and IID columns. So if the first line of your covariate file is FID, IID, age, batch, sex, PC1, PC2, etc. then you would update covariate_sex_number below to 3. If your depression phenotype is also in column six of the fam file, you will need to delete the lines starting --pheno from the sample code, otherwise the GWAS will be performed twice with two identical outputs.
 
 ```
 module load plink2
