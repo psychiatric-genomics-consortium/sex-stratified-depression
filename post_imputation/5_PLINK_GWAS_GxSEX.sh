@@ -11,7 +11,7 @@
 ## You will also need to add which number covariate sex is in the covariate file (excluding the FID and IID columns).
 ## So if the first line of your covariate file is FID, IID, age, batch, sex, PC1, PC2, etc. then you would update covariate_sex_number to 3.
 
-total="$( head -n 1 $2 | wc -w)"
+total="$(head -n 1 $2 | wc -w)"
 param1=$((total-1))
 param2=$((param1+$3))
 
