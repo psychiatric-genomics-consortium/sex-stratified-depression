@@ -131,20 +131,22 @@ module load r
 Rscript ./sex-stratified-depression/post_imputation/4_Associated_PCAs.r filename
 ```
 
-It is then down to the analyst to prepare a final covariate file, combining the outputted PCs with any other appropriate covariates for their cohort, such as age, genotyping batch, etc. The final covariate files should have a header row, with the first two columns containing FID and IID, with the remaining columns containing the associated PCs and any other covariates. The name of the final covariate file should be the same as the one created using the R code above. For the whole sample genotype-by-sex interaction analysis, sex (1 = male, 2 = female) is automatically added as a covariate based on column 5 in the .fam file. Sex shouldn't be included in the other (male only, female only, and X chromosome) covariate files. 
+It is then down to the analyst to prepare a final covariate file, combining the outputted PCs with any other appropriate covariates for their cohort, such as age, genotyping batch, etc. The final covariate files should have a header row, with the first two columns containing FID and IID, with the remaining columns containing the associated PCs and any other covariates. For the whole sample genotype-by-sex interaction analysis, sex (1 = male, 2 = female) is automatically added as a covariate based on column 5 in the .fam file. Sex shouldn't be included in the other (male only, female only, and X chromosome) covariate files. 
 
 #### Step 5
 
 Step 5 is to run the GWAS. There are three association analyses to be performed: whole sample with a genotype-by-sex interaction, male-only, and female-only.  If your sample includes only one sex, then only an analysis of that sex is possible. File formats and naming conventions are provided at the end of the document, and these should be followed as closely as possible.
 
+Option 1 - **PLINK**
 
-If related individuals were removed in step 2 then run the following scripts to run the three GWAS in **PLINK**. You will need to update the --parameters line for the GxSex analysis to provide the correct values based on the number and position of your covariates, see sample code for details:
+If related individuals were removed in step 2, then run [5_PLINK_GWAS_GxSEX.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh), [5_PLINK_GWAS_FEMALE.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_FEMALE.sh), and [5_PLINK_GWAS_MALE.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh) using the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4, then you will only need to update the filename prefix. For the GxSEX analysis, you will also need to add which number covariate sex is, excluding the FID and IID columns. So if the first line of your covariate file is FID, IID, age, batch, sex, PC1, PC2, etc. then you would update covariate_sex_number below to 3.
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_GxSEX.sh
-
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_FEMALE.sh
-
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_PLINK_GWAS_MALE.sh
+```
+module load plink2
+./sex-stratified-depression/post_imputation/5_PLINK_GWAS_GxSEX.sh filename filename_qc1_PCA.covar covariate_sex_number
+./sex-stratified-depression/post_imputation/5_PLINK_GWAS_FEMALE.sh filename filename_qc1_female_PCA.covar
+./sex-stratified-depression/post_imputation/5_PLINK_GWAS_MALE.sh filename filename_qc1_male_PCA.covar
+```
 
 
 If you have relatedness in your sample or you are intending to use **regenie** for the GWAS then there are multiple stages to this analysis. Firstly, a genomic relationship matrix is created using the original genotyped variants. You need to create a single-column list of genotyped variants’ IDs for your data and save it in a file called genotypedvariants.txt with no header row in your working directory. Then running the following code will apply the required quality control (minor allele frequency of ≥1%, a Hardy–Weinberg equilibrium test not exceeding P = 1 × 10−15, a variant call rate above 99%, and LD pruned using a R2 threshold of 0.9 with a window size of 1,000 markers and a step size of 100 markers):
