@@ -148,10 +148,16 @@ module load plink2
 ./sex-stratified-depression/post_imputation/5_PLINK_GWAS_MALE.sh filename filename_qc1_male_PCA.covar
 ```
 
+Option 2 - **regenie**
 
-If you have relatedness in your sample or you are intending to use **regenie** for the GWAS then there are multiple stages to this analysis. Firstly, a genomic relationship matrix is created using the original genotyped variants. You need to create a single-column list of genotyped variants’ IDs for your data and save it in a file called genotypedvariants.txt with no header row in your working directory. Then running the following code will apply the required quality control (minor allele frequency of ≥1%, a Hardy–Weinberg equilibrium test not exceeding P = 1 × 10−15, a variant call rate above 99%, and LD pruned using a R2 threshold of 0.9 with a window size of 1,000 markers and a step size of 100 markers):
+If you have relatedness in your sample or you are intending to use **regenie** for the GWAS, then there are multiple stages to this analysis. Firstly, a genomic relationship matrix is created using the original genotyped variants. You need to create a single-column list of genotyped variants’ IDs for your data and save it in a file called genotypedvariants.txt with no header row in your working directory.
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Prep_Geno.sh
+Then running [5_regenie_Prep_Geno.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Prep_Geno.sh) using the code below will apply the following quality control: (minor allele frequency of ≥ 1%, a Hardy–Weinberg equilibrium test with _P_ ≥ 10<sup>−15</sup>, a variant call rate above 99%, and LD pruned using a R<sup>2</sup> threshold of 0.9 with a window size of 1,000 markers and a step size of 100 markers.
+
+```
+module load plink2
+./sex-stratified-depression/post_imputation/5_regenie_Prep_Geno.sh filename
+```
 
 Then you need to run step1 of regenie:
 
@@ -204,25 +210,37 @@ https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blo
 
 ### File formats and naming conventions
 
-•	Save data as a gzip-compressed, tab-separated plain text file
+If you ran the GWAS using PLINK and have both sexes in your data then there should be 3 summary statistic files:
 
-•	Filename: COHORT[-SUBCOHORT]_CLUSTER_SEX_SOMES_VERSION.FORMAT.gz
+```
+filename_qc1_GWAS.PHENO1.glm.logistic.hybrid
+filename_qc1_female_GWAS.PHENO1.glm.logistic.hybrid
+filename_qc1_male_GWAS.PHENO1.glm.logistic.hybrid
+```
 
-o	COHORT: abbreviation or code for cohort name. E.g., UK Biobank = UKBB, Generation Scotland = GenScot
+If you have only one sex available then you will just have a single summary statistic file for that sex.
 
-o	SUBCOHORT: Subcohort or substudy name, separated from cohort abbreviation by a hyphen (optional). For example, for GenScot: Scottish Family Health Study = -SFHS ("GenScot-SFHS").  Only required if submitting multiple sumstats files from subcohorts that are part of the same study.
+These summary statistic files along with the respective GWAS log files should be archived and compressed to a folder. The folder name should take the following naming convention: COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.FORMAT where
 
-o	CLUSTER: Genetic similarity cluster abbreviation (three letter code, upper case; i.e., AFR, AMR, CSE, EAS, EUR, MID, HIS, SAS).
+* COHORT: abbreviation or code for cohort name. E.g., UK Biobank = UKBB, Generation Scotland = GenScot
 
-o	SEX: FEMALE, MALE, or BOTH
+* SUBCOHORT: Subcohort or substudy name, separated from cohort abbreviation by a hyphen (optional). For example, for GenScot: Scottish Family Health Study = -SFHS ("GenScot-SFHS").  Only required if submitting multiple sumstats files from subcohorts that are part of the same study.
 
-o	SOMES: Chromosomes included in file (AUTO = autosomes, ALLO = sex chromosomes)
+* CLUSTER: Genetic similarity cluster abbreviation (three letter code, upper case; i.e., AFR, AMR, CSE, EAS, EUR, MID, HIS, SAS).
 
-o	VERSION: Version identifier for this analysis, to indicate dataset release / analyst / date etc. Examples: UK Biobank → ukb21007-hrc-noPGC,  Biobank Japan → SakaueKanai2020, FinnGen → R12.
+* SEX: FEMALE, MALE, or BOTH
 
-o	FORMAT: sumstats format (plink, regenie, daner, xwas)
+*	VERSION: Version identifier for this analysis, to indicate dataset release / analyst / date etc. Examples: UK Biobank → ukb21007-hrc-noPGC,  Biobank Japan → SakaueKanai2020, FinnGen → R12.
 
-•	For COHORT, SUBCOHORT, and VERSION, use only letters, numbers, and hyphens (no spaces, periods, underscores, or other punctuation).
+* FORMAT: sumstats format (plink, regenie, daner, xwas)
+
+For COHORT, SUBCOHORT, and VERSION, use only letters, numbers, and hyphens (no spaces, periods, underscores, or other punctuation).
+
+To archive and compress the summary statistics and log files use:
+
+```
+tar cvzf COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.FORMAT.tgz *_GWAS*
+```
 
 Sumstats required information
 
