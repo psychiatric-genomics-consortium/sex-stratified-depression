@@ -21,6 +21,7 @@ plink2 \
 --keep $1_qc1.id \
 --extract genotypedvariants.txt \
 --max-alleles 2 \
+--snps-only \
 --chr 1-22 \
 --maf 0.01 \
 --geno 0.01 \
@@ -34,6 +35,7 @@ plink2 \
 --keep $1_qc1_female.id \
 --extract genotypedvariants.txt \
 --max-alleles 2 \
+--snps-only \
 --chr 1-22 \
 --maf 0.01 \
 --geno 0.01 \
@@ -47,6 +49,7 @@ plink2 \
 --keep $1_qc1_male.id \
 --extract genotypedvariants.txt \
 --max-alleles 2 \
+--snps-only \
 --chr 1-22 \
 --maf 0.01 \
 --geno 0.01 \
