@@ -181,24 +181,28 @@ Please also prepare a readme file to accompany the summary statistics based on t
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-It is assumed that you will have already run the analysis of the autosomal chromosomes as some of that output (list of related individuals and covariate file) are reused here. We have prepared sample code using XWAS for the remaining steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. 
+It is assumed that you will have already run the analysis of the autosomal chromosomes as some of that output (list of related individuals and covariate file) are reused here. 
 
-The sample code should be placed in the same working directory used for the autosomal analysis which contains either the imputed data or symbolic links to it. The sample code expects genome-wide (autosomes plus the X chromosome) imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file.
-
-A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is expected in the working directory and will need to have the same name as your imputed data with a .pheno suffix. A header row in the phenotype file is optional.
-All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data. 
-
-The XWAS software (https://github.com/KeinanLab/xwas-3.0) is recommended for the quality control and association analysis and a useful manual is available here: https://github.com/KeinanLab/xwas-3.0/blob/master/XWAS_manual_v3.0.pdf.
+The XWAS software (https://github.com/KeinanLab/xwas-3.0) is recommended for the quality control and association analysis and a useful [manual](https://github.com/KeinanLab/xwas-3.0/blob/master/XWAS_manual_v3.0.pdf) is available.
 
 From your existing working directory clone the XWAS repository from Github using:
 
 ```git clone https://github.com/KeinanLab/xwas-3.0.git```
 
+We have prepared sample code for the remaining steps, located here: [post_imputation](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation), and there are comments at the top of each sample code with instructions. The sample code expects genome-wide (autosomes plus the X chromosome) imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code will have been cloned to your working directory during the autosomal steps above.
+
+A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same name as your imputed data with a .pheno suffix. A header row in the phenotype file is optional.
+
+All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data. 
+
+
 #### Step 1
 
-Step 1 is to run quality control on your data. Information on post-imputation QC is in section 5.3 in the XWAS manual. The following sample code will perform the recommended quality control:
+Step 1 is to run quality control on your data. Information on post-imputation QC is in section 5.3 in the XWAS manual. The [X1_QC.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X1_QC.sh) sample code will perform the recommended quality control by running:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X1_QC.sh
+```
+./sex-stratified-depression/post_imputation/X1_QC.sh filename
+```
 
 #### Step 2
 
