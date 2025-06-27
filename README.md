@@ -159,13 +159,13 @@ module load plink2
 ./sex-stratified-depression/post_imputation/5_regenie_Prep_Geno.sh filename
 ```
 
-Then you need to run step1 of regenie:
+Next you need to run step 1 of regenie for the three analyses using the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4 of the autosomal analysis, then you will only need to update the filename prefix.
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_GxSEX.sh
-
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_FEMALE.sh
-
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step1_MALE.sh
+```
+./sex-stratified-depression/post_imputation/5_regenie_Step1_GxSEX.sh filename filename_qc1_PCA.covar
+./sex-stratified-depression/post_imputation/5_regenie_Step1_FEMALE.sh filename filename_qc1_female_PCA.covar
+./sex-stratified-depression/post_imputation/5_regenie_Step1_MALE.sh filename filename_qc1_male_PCA.covar
+```
 
 followed by step 2 of regenie:
 
