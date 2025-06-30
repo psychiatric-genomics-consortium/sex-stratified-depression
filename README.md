@@ -38,15 +38,9 @@ If you have X chromosome data, then the imputation should be conducted separatel
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-We have prepared sample code using [PLINK2](https://www.cog-genomics.org/plink/2.0/), [eigensoft](https://github.com/DReichLab/EIG), [R](https://www.r-project.org/), [regenie](https://rgcgithub.github.io/regenie/options/), and [XWAS](https://github.com/KeinanLab/xwas-3.0) for the remaining analysis steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. The guidance below assumes you will have launched an interactive session to run each sample code.
+We have prepared [sample code](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation) based on [PLINK2](https://www.cog-genomics.org/plink/2.0/), [eigensoft](https://github.com/DReichLab/EIG), [R](https://www.r-project.org/), [regenie](https://rgcgithub.github.io/regenie/options/), and [XWAS](https://github.com/KeinanLab/xwas-3.0) which can be cloned using the code below. There are comments at the top of each sample code with instructions. The guidance below assumes you will have launched an interactive session to run each sample code.
 
-The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. regenie may fail if your data includes variants that are listed as being on chromosomes 24 and above and so those variants should be removed. 
-
-The sample code assumes that all software can be loaded using ```module load software```. You can use ```module spider software``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
-
-All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
-
-It is advisable to create a working directory for the analysis and then move into that directory:
+It is advised to create a working directory to which you have read, write and execute access for the analysis and then move into that directory:
 
 ```
 mkdir SexStratAnalysis
@@ -56,15 +50,21 @@ cd SexStratAnalysis
 Next set up symbolic links to your imputed genome-wide data:
 
 ```
-ln -s path_to_your_bed_file filename.bed
-ln -s path_to_your_bim_file filename.bim
-ln -s path_to_your_fam_file filename.fam
+ln -s path_to_your_bed_file.bed filename.bed
+ln -s path_to_your_bim_file.bim filename.bim
+ln -s path_to_your_fam_file.fam filename.fam
 ```
 
 and then clone the sample code repository using:
 ```
 git clone https://github.com/psychiatric-genomics-consortium/sex-stratified-depression.git
 ```
+
+The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. regenie may fail if your data includes variants that are listed as being on chromosomes 24 and above and so those variants should be removed. 
+
+The sample code assumes that the relevant software has been loaded using ```module load software```. You can use ```module spider software``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
+
+All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
 
 A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression).
 
@@ -135,7 +135,7 @@ It is then down to the analyst to prepare a final covariate file, combining the 
 
 #### Step 5
 
-Step 5 is to run the GWAS. There are three association analyses to be performed: whole sample with a genotype-by-sex interaction, male-only, and female-only.  If your sample includes only one sex, then only an analysis of that sex is possible. File formats and naming conventions are provided at the end of the document, and these should be followed as closely as possible.
+Step 5 is to run the GWAS. There are three association analyses to be performed: whole sample with a genotype-by-sex interaction, male-only, and female-only. If your sample includes only one sex, then only an analysis of that sex is possible. File formats and naming conventions are provided at the end of the document, and these should be followed as closely as possible.
 
 Option 1 - **PLINK**
 
