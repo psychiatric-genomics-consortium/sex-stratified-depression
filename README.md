@@ -212,7 +212,7 @@ Step X1 is to run quality control on your data. Information on post-imputation Q
 Step X2 is to conduct the association analysis of the X chromosome. Section 6 of the XWAS [manual](https://github.com/KeinanLab/xwas-3.0/blob/master/XWAS_manual_v3.0.pdf) provides further details on the variant association testing. The [X2_XWAS.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X2_XWAS.sh) sample code will perform the recommended analyses of the X chromosome by running the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames created during Step 4 of the autosomal analysis, then you will only need to update the filename prefix for the covariate filename. Sex should not be included as a covariate in the covariate file.
 
 ```
-./sex-stratified-depression/post_imputation/X2_QC.sh filename filename_qc1_PCA_forX.covar
+./sex-stratified-depression/post_imputation/X2_XWAS.sh filename filename_qc1_PCA_forX.covar
 ```
 
 ### Results File formats and naming conventions
