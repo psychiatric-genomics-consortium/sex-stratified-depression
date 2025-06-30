@@ -70,7 +70,7 @@ git clone https://github.com/psychiatric-genomics-consortium/sex-stratified-depr
 
 A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression).
 
-The schematic below illustrates the analysis pipeline:
+The schematic below illustrates the analysis pipeline for the autosomal chromosomes:
 
 ![Image](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/pipeline.png)
  
@@ -199,23 +199,23 @@ A three column depression phenotype file (Family ID, Individuals ID, depression 
 All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data. 
 
 
-#### Step 1
+#### Step X1
 
-Step 1 is to run quality control on your data. Information on post-imputation QC is in section 5.3 in the XWAS manual. The [X1_QC.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X1_QC.sh) sample code will perform the recommended quality control by running:
+Step X1 is to run quality control on your data. Information on post-imputation QC is in section 5.3 in the XWAS manual. The [X1_QC.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X1_QC.sh) sample code will perform the recommended quality control by running:
 
 ```
 ./sex-stratified-depression/post_imputation/X1_QC.sh filename
 ```
 
-#### Step 2
+#### Step X2
 
-Step 2 is to conduct the association analysis of the X chromosome. Section 6 of the XWAS [manual](https://github.com/KeinanLab/xwas-3.0/blob/master/XWAS_manual_v3.0.pdf) provides further details on the variant association testing. The following sample code will perform the recommended analyses of the X chromosome: 
+Step X2 is to conduct the association analysis of the X chromosome. Section 6 of the XWAS [manual](https://github.com/KeinanLab/xwas-3.0/blob/master/XWAS_manual_v3.0.pdf) provides further details on the variant association testing. The [X2_XWAS.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X2_XWAS.sh) sample code will perform the recommended analyses of the X chromosome by running the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames created during Step 4 of the autosomal analysis, then you will only need to update the filename prefix for the covariate filename. Sex should not be included as a covariate in the covariate file.
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X2_XWAS.sh
+```
+./sex-stratified-depression/post_imputation/X2_QC.sh filename filename_qc1_PCA_forX.covar
+```
 
-
-
-### File formats and naming conventions
+### Results File formats and naming conventions
 
 If you ran the GWAS using PLINK and have both sexes in your data then there should be 3 summary statistic files:
 
