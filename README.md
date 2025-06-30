@@ -81,9 +81,15 @@ module load plink2
 ./sex-stratified-depression/post_imputation/1_Relatedness.sh filename
 ```
 
-To identify the proportion of relatives you will need to compare the number of individuals written to *king.cutoff.out.id with the number of individuals in the fam file. Note that’s the *king.cutoff.out.id contains a header row so you will need to subtract 1 if you use ```wc -l * king.cutoff.out.id``` to count the number of rows.
+To identify the proportion of relatives you will need to compare the number of individuals written to *king.cutoff.out.id with the number of individuals in the fam file. Note that’s the *king.cutoff.out.id contains a header row so you will need to subtract 1 if you use ```wc -l * king.cutoff.out.id``` to count the number of rows. The proportion of relatves can also be calculated using the following code:
 
-If the proportion of related individuals is less than or equal to 10% of the whole sample, then you can opt to remove them and run the GWAS using PLINK. If your sample contains more than 10% related individuals, then regenie is the preferred way to conduct the GWAS. You can also opt to use regenie regardless of the relatedness in your sample thereby keeping all samples.
+```
+fam_rows=$(wc -l "filename.fam" | awk '{print $1}')
+removed_ind=$(wc -l "filename_king_unrel.king.cutoff.out.id" | awk '{print $1-1}')
+echo "scale=3; $removed_ind / $fam_rows" | bc -l
+```
+
+If the proportion of related individuals is less than or equal to 0.1 of the whole sample, then you can opt to remove them and run the GWAS using PLINK. If your sample contains more than 0.1 related individuals, then regenie is the preferred way to conduct the GWAS. You can also opt to use regenie regardless of the relatedness in your sample thereby keeping all samples.
 
 #### Step 2
 
