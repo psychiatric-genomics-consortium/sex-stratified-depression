@@ -38,9 +38,11 @@ If you have X chromosome data, then the imputation should be conducted separatel
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-We have prepared sample code using PLINK2, regenie, eigensoft, and R for the remaining steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. The guidance below assumes you will have launched an interactive session to run each sample code.
 
-The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. 
+
+We have prepared sample code using [PLINK2](https://www.cog-genomics.org/plink/2.0/), [eigensoft](https://github.com/DReichLab/EIG), [R](https://www.r-project.org/), [regenie](https://rgcgithub.github.io/regenie/options/), and [XWAS](https://github.com/KeinanLab/xwas-3.0) for the remaining analysis steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. The guidance below assumes you will have launched an interactive session to run each sample code.
+
+The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. regenie may fail if your data includes variants that are listed as being on chromosomes 24 and above and so those variants should be removed. 
 
 The sample code assumes that all software can be loaded using ```module load {software}```. You can use ```module spider {software}``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
 
@@ -159,7 +161,7 @@ module load plink2
 ./sex-stratified-depression/post_imputation/5_regenie_Prep_Geno.sh filename
 ```
 
-Next you need to run step 1 of regenie for the three analyses using the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4 of the autosomal analysis, then you will only need to update the filename prefix.
+Next you need to run step 1 of regenie for the three analyses using the code below. After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4 of the autosomal analysis, then you will only need to update the filename prefix. If regenie fails at this point, it may be due to variants listed as being on chromosomes 24 and above in your data and so those should be removed.
 
 ```
 module load regenie
@@ -207,7 +209,7 @@ Step 1 is to run quality control on your data. Information on post-imputation QC
 
 #### Step 2
 
-Step 2 is to conduct the association analysis of the X chromosome. Section 6 of the XWAS manual provides further details on the variant association testing. The following sample code will perform the recommended analyses of the X chromosome: 
+Step 2 is to conduct the association analysis of the X chromosome. Section 6 of the XWAS [manual](https://github.com/KeinanLab/xwas-3.0/blob/master/XWAS_manual_v3.0.pdf) provides further details on the variant association testing. The following sample code will perform the recommended analyses of the X chromosome: 
 
 https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/X2_XWAS.sh
 
@@ -349,13 +351,7 @@ Prepare a plaintext file with analyst and study information called COHORT[-SUBCO
 
 •	Grant codes and acknowledgments
 
-## Built With
 
-* [PLINK2](https://www.cog-genomics.org/plink/2.0/)
-* [eigensoft](https://github.com/DReichLab/EIG)
-* [R](https://www.r-project.org/)
-* [regenie](https://rgcgithub.github.io/regenie/options/)
-* [XWAS](https://github.com/KeinanLab/xwas-3.0)
 
 ## Lead Analysts
 
