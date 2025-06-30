@@ -192,12 +192,11 @@ From your existing working directory clone the XWAS repository from Github using
 
 ```git clone https://github.com/KeinanLab/xwas-3.0.git```
 
-We have prepared sample code for the remaining steps, located here: [post_imputation](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation), and there are comments at the top of each sample code with instructions. The sample code expects genome-wide (autosomes plus the X chromosome) imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code will have been cloned to your working directory during the autosomal steps above.
+We have prepared sample code for the remaining steps, located here: [post_imputation](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation). The sample code will have been cloned to your working directory during the autosomal steps [above](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/edit/master/README.md#autosomal-chromosomes). There are comments at the top of each sample code with instructions. The sample code expects genome-wide (autosomes plus the X chromosome) imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. 
 
 A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same name as your imputed data with a .pheno suffix. A header row in the phenotype file is optional.
 
 All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data. 
-
 
 #### Step X1
 
