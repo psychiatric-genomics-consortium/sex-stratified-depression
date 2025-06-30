@@ -74,7 +74,7 @@ The schematic below illustrates the analysis pipeline for the autosomal chromoso
  
 #### Step 1
 
-Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be performed using the [1_Relatedness.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh) sample code by running the code below. You are likely to need to update the software name and the filename in all subsequent code snippets.
+Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be performed using the [1_Relatedness.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh) sample code by running the code below. You are likely to need to update the software name and the filename prefix (i.e. leave off bed/bim/fam) in all subsequent code snippets.
 
 ```
 module load plink2
