@@ -47,7 +47,7 @@ mkdir SexStratAnalysis
 cd SexStratAnalysis
 ```
 
-Next set up symbolic links to your imputed genome-wide data:
+Next set up symbolic links to your imputed genome-wide data, updating the file path and the filename you wish to use below.
 
 ```
 ln -s path_to_your_bed_file.bed filename.bed
@@ -74,7 +74,7 @@ The schematic below illustrates the analysis pipeline for the autosomal chromoso
  
 #### Step 1
 
-Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be performed using the [1_Relatedness.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh) sample code by running:
+Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be performed using the [1_Relatedness.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh) sample code by running the code below. You are likely to need to update the software name and the filename in all subsequent code snippets.
 
 ```
 module load plink2
@@ -130,7 +130,7 @@ module load eigensoft
 
 #### Step 4
 
-Step 4 is to determine the PCs that will be included as covariates in the GWAS. The first 4 PCs and thereafter each component nominally associated (_P_ < 0.05) with case-control status should be included. A logistic regression of depression status on each component in turn should be used to determine an association and this can be achieved using the [4_Associated_PCAs.r](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/4_Associated_PCAs.r) R code by running:
+Step 4 is to determine the PCs that will be included as covariates in the GWAS. The first 4 PCs and thereafter each component nominally associated (_P_ < 0.05) with case-control status should be included. A logistic regression of depression status on each component in turn should be used to determine an association and if you ran Step 3, this can be achieved using the [4_Associated_PCAs.r](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/4_Associated_PCAs.r) R code by running:
 
 ```
 module load r
