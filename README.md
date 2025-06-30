@@ -217,6 +217,8 @@ Step X2 is to conduct the association analysis of the X chromosome. Section 6 of
 
 ### Results File formats and naming conventions
 
+#### PLINK
+
 If you ran the GWAS using PLINK and have both sexes in your data then there should be 3 summary statistic files:
 
 ```
@@ -227,7 +229,7 @@ filename_qc1_male_GWAS.PHENO1.glm.logistic.hybrid
 
 If you have only one sex available then you will just have a single summary statistic file for that sex.
 
-These summary statistic files along with the respective GWAS log files should be archived and compressed to a folder. The folder name should take the following naming convention: COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.FORMAT where
+These summary statistic files along with the respective GWAS log files should be archived and compressed to a folder. The folder name should take the following naming convention: COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.PLINK where
 
 * COHORT: abbreviation or code for cohort name. E.g., UK Biobank = UKBB, Generation Scotland = GenScot
 
@@ -239,19 +241,48 @@ These summary statistic files along with the respective GWAS log files should be
 
 *	VERSION: Version identifier for this analysis, to indicate dataset release / analyst / date etc. Examples: UK Biobank → ukb21007-hrc-noPGC,  Biobank Japan → SakaueKanai2020, FinnGen → R12.
 
-* FORMAT: sumstats format (plink, regenie, daner, xwas)
+For COHORT, SUBCOHORT, and VERSION, use only letters, numbers, and hyphens (no spaces, periods, underscores, or other punctuation).
+
+To archive and compress the summary statistics and log files use:
+
+```
+tar cvzf COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.PLINK.tgz *_GWAS*
+```
+
+#### XWAS
+
+If you ran the X chromosome analysis then there should be 4 summary statistic files:
+
+```
+filename_final_X_xwas.xstrat.logistic
+filename_final_X_xwas.xdiff.logistic
+filename_final_X_model2.xstrat.logistic
+filename_final_X_model2.xdiff.logistic
+```
+
+These summary statistic files along with the respective log files should be archived and compressed to a folder. The folder name should take the following naming convention: COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.XWAS where
+
+* COHORT: abbreviation or code for cohort name. E.g., UK Biobank = UKBB, Generation Scotland = GenScot
+
+* SUBCOHORT: Subcohort or substudy name, separated from cohort abbreviation by a hyphen (optional). For example, for GenScot: Scottish Family Health Study = -SFHS ("GenScot-SFHS").  Only required if submitting multiple sumstats files from subcohorts that are part of the same study.
+
+* CLUSTER: Genetic similarity cluster abbreviation (three letter code, upper case; i.e., AFR, AMR, CSE, EAS, EUR, MID, HIS, SAS).
+
+* SEX: FEMALE, MALE, or BOTH
+
+*	VERSION: Version identifier for this analysis, to indicate dataset release / analyst / date etc. Examples: UK Biobank → ukb21007-hrc-noPGC,  Biobank Japan → SakaueKanai2020, FinnGen → R12.
 
 For COHORT, SUBCOHORT, and VERSION, use only letters, numbers, and hyphens (no spaces, periods, underscores, or other punctuation).
 
 To archive and compress the summary statistics and log files use:
 
 ```
-tar cvzf COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.FORMAT.tgz *_GWAS*
+tar cvzf COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.XWAS.tgz *model2*log* *xwas*log*
 ```
 
-Sumstats required information
+#### Other
 
-Sumstats (output from regenie, plink2, XWAS, Ricopoli) should have the following information:
+If any other association analysis software was used for the analyses, then please ensure the following information is included in the summary statistics.
 
 •	Chromosome (CHR): 1-23 (numeric)
 
@@ -261,71 +292,21 @@ Sumstats (output from regenie, plink2, XWAS, Ricopoli) should have the following
 
 •	Effect allele 
 
-o	PLINK: A1
-
-o	regenie: allele1
-
-o	daner: A1
-
 •	Non-effect allele
-
-o	PLINK: A2
-
-o	regenie: allele0
-
-o	daner: A2
 
 •	Frequency of effect allele in cases and controls
 
-o	PLINK: A1_CASE_FREQ, A1_CTRL_FREQ
-
-o	regenie: A1FREQ_CASES, A1FREQ_CONTROLS
-
-o	daner: FRQ_A, FRQ_U
-
 •	Sample size of cases and controls
-
-o	PLINK: A1_CASE_FREQ, A1_CTRL_FREQ, ALLELE_CT, OBS_CT
-
-o	regenie: N_CASES, N_CONTROLS
-
-o	daner: Nca, Nco
 
 •	Imputation info score 
 
-o	PLINK: MACH_R2
-
-o	regenie: INFO
-
-o	daner: INFO
-
 •	Effect size: Odds ratio or log(Odds ratio)
-
-o	PLINK: OR
-
-o	regenie: BETA
-
-o	daner: OR
 
 •	Standard error: SE of log(OR)
 
-o	PLINK: LOG(OR)_SE
-
-o	regenie: SE
-
-o	daner: SE
-
-•	Test statistic of association 
-
-o	PLINK: Z_STAT
-
-o	regenie: CHISQ
+•	Test statistic of association: T-statistic or Z-score
 
 •	Association test -log10(p-value)
-
-o	PLINK: NEG_LOG10_P
-
-o	regenie: LOG10P
 
 ### README file
 
