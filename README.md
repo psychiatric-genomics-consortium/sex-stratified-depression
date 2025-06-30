@@ -38,8 +38,6 @@ If you have X chromosome data, then the imputation should be conducted separatel
 
 The ricopili imputation pipeline lifts the data over the build to hg19. If a different tool was used for imputation, then you will need to check that your data is aligned with build hg19. If your data is not using build hg19, then visit: https://genome.sph.umich.edu/wiki/LiftOver which contains guidance on how best to update the genome build for your data.
 
-
-
 We have prepared sample code using [PLINK2](https://www.cog-genomics.org/plink/2.0/), [eigensoft](https://github.com/DReichLab/EIG), [R](https://www.r-project.org/), [regenie](https://rgcgithub.github.io/regenie/options/), and [XWAS](https://github.com/KeinanLab/xwas-3.0) for the remaining analysis steps which is located here: https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation. There are comments at the top of each sample code with instructions. The guidance below assumes you will have launched an interactive session to run each sample code.
 
 The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. regenie may fail if your data includes variants that are listed as being on chromosomes 24 and above and so those variants should be removed. 
@@ -172,11 +170,13 @@ module load regenie
 
 followed by step 2 of regenie:
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_GxSEX.sh
+```
+module load regenie
+./sex-stratified-depression/post_imputation/5_regenie_Step2_GxSEX.sh filename filename_qc1_PCA.covar
+./sex-stratified-depression/post_imputation/5_regenie_Step2_FEMALE.sh filename filename_qc1_female_PCA.covar
+./sex-stratified-depression/post_imputation/5_regenie_Step2_MALE.sh filename filename_qc1_male_PCA.covar
+```
 
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_FEMALE.sh
-
-https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/5_regenie_Step2_MALE.sh
 
 Please also prepare a readme file to accompany the summary statistics based on the description at the end of this document.
 
