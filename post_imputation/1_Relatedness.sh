@@ -6,8 +6,9 @@
 ## The script will create a relationship matrix for the whole sample and then identify the related individuals
 ## usage:
 ## $ module load plink2
-## $ ./1_Relatedness.sh {filename}
-## * note {filename} is the name of your data file without the .bed/.bim/.fam suffix
+## $ ./1_Relatedness.sh filename
+## *note filename is the name of your data file without the .bed/.bim/.fam suffix. 
+## You are also likely to need to update the software name (in this instance plink2) to match that used on your server.
 
 ## You should compare the number of individuals in your .fam file to the number of individuals listed in the file suffixed with king.cutoff.out.id
 ## If > 10% of individuals are related, then it is advised to use regenie for the association analysis to account for relatedness and analysing the whole sample
