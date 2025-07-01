@@ -1,8 +1,8 @@
 ## R script to identify which PCAs are associated with phenotype
 ## usage:
 ## module load r
-## Rscript 4_Associated_PCAs.r {filename}
-## * note {filename} is the original name of your data, the code automatically applies the _qc1 suffix
+## Rscript 4_Associated_PCAs.r filename
+## * note filename is the original name of your data, the code automatically applies the _qc1 suffix
 
 args <- commandArgs(trailingOnly = TRUE)
 filename <- args[1]
