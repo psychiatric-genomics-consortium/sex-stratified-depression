@@ -13,8 +13,8 @@
 
 ## usage:
 ## $ module load plink2
-## $ ./5_regenie_Prep_Geno.sh {filename}
-## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix
+## $ ./5_regenie_Prep_Geno.sh filename
+## * note filename is the name of your data without the .bed/.bim/.fam suffix
 
 plink2 \
 --bfile $1 \
