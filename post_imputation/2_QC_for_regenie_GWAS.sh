@@ -14,7 +14,7 @@
 ## usage:
 ## $ module load plink2
 ## $ ./2_QC_for_regenie_GWAS.sh filename
-## * note filename is the original name of your data without the .bed/.bim/.fam suffix
+## * note filename is the name of your data without the .bed/.bim/.fam suffix
 
 plink2 \
 --bfile $1 \
