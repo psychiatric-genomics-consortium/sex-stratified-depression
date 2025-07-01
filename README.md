@@ -40,7 +40,7 @@ The ricopili imputation pipeline lifts the data over the build to hg19. If a dif
 
 We have prepared [sample code](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation) based on [PLINK2](https://www.cog-genomics.org/plink/2.0/), [eigensoft](https://github.com/DReichLab/EIG), [R](https://www.r-project.org/), [regenie](https://rgcgithub.github.io/regenie/options/), and [XWAS](https://github.com/KeinanLab/xwas-3.0) which can be cloned using the code below. There are comments at the top of each sample code with instructions. The guidance below assumes you will have launched an interactive session to run each sample code.
 
-The format of the results files, naming conventions, and what to return to use is provided lower down the page. Please also prepare a readme file to accompany the summary statistics based on this [description](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#readme-file).
+The format of the results files, naming conventions, and what to return to us is provided [lower down the page](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#format-of-the-results-files-and-naming-conventions). Please also prepare a readme file to accompany the summary statistics based on this [description](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#readme-file).
 
 
 It is advised to create a working directory to which you have read, write and execute access for the analysis and then move into that directory:
