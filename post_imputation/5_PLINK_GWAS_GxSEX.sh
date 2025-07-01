@@ -5,7 +5,7 @@
 ## $ module load plink2
 ## $ ./sex-stratified-depression/post_imputation/5_PLINK_GWAS_GxSEX.sh filename filename_qc1_PCA.covar covariate_sex_number
 
-## filename is the original name of your data without the .bed/.bim/.fam suffix. 
+## filename is the name of your data without the .bed/.bim/.fam suffix. 
 ## After the filename, the covariate filename is also required and 
 ## if you have retained the covariate filenames from Step 4, then you will only need to update the filename prefix. 
 ## You will also need to add which number covariate sex is in the covariate file (excluding the FID and IID columns).
