@@ -4,7 +4,7 @@
 ## $ module load plink2
 ## $ module load eigensoft
 ## $ ./3_Create_Multi_Ancestry_PCAs.sh filename
-## * note filename is the original name of your data without the _qc1 and .bed/.bim/.fam suffix
+## * note filename is the name of your data without the _qc1 and .bed/.bim/.fam suffix
 
 ## create file of high LD regions to be excluded for PCA
 echo "5 44000000 51500000 r1" > highld_for_exc.txt
