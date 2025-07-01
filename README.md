@@ -64,7 +64,7 @@ git clone https://github.com/psychiatric-genomics-consortium/sex-stratified-depr
 
 The sample code expects your imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. The sample code expects the chromosomes to be merged so that there is a single set of bed/bim/fam files containing genome-wide data. regenie may fail if your data includes variants that are listed as being on chromosomes 24 and above and so those variants should be removed. 
 
-The sample code assumes that the relevant software has been loaded using ```module load software```. You can use ```module spider software``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
+The sample code requires that the relevant software has been loaded using ```module load software```. You can use ```module spider software``` to check whether the software is installed on your server and find it's location. If the software isn't available, then you will need to download and install the software and update the sample code to point to the relevant executable.
 
 All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
 
