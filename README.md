@@ -253,6 +253,42 @@ To archive and compress the summary statistics and log files use:
 tar cvzf COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.PLINK.tgz *_GWAS*
 ```
 
+Please also prepare a readme file to accompany the summary statistics based on this [description](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#readme-file).
+
+#### regenie
+
+If you ran the GWAS using regenie and have both sexes in your data then there should be 3 summary statistic files:
+
+```
+filename_qc1_regenie_firth_GxSEX_phenotype.regenie
+filename_qc1_female_regenie_firth_phenotype.regenie
+filename_qc1_male_regenie_firth_phenotype.regenie
+```
+
+If you have only one sex available then you will just have a single summary statistic file for that sex.
+
+These summary statistic files along with the respective GWAS log files should be archived and compressed to a folder. The folder name should take the following naming convention: COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.regenie where
+
+* COHORT: abbreviation or code for cohort name. E.g., UK Biobank = UKBB, Generation Scotland = GenScot
+
+* SUBCOHORT: Subcohort or substudy name, separated from cohort abbreviation by a hyphen (optional). For example, for GenScot: Scottish Family Health Study = -SFHS ("GenScot-SFHS").  Only required if submitting multiple sumstats files from subcohorts that are part of the same study.
+
+* CLUSTER: Genetic similarity cluster abbreviation (three letter code, upper case; i.e., AFR, AMR, CSE, EAS, EUR, MID, HIS, SAS).
+
+* SEX: FEMALE, MALE, or BOTH
+
+*	VERSION: Version identifier for this analysis, to indicate dataset release / analyst / date etc. Examples: UK Biobank → ukb21007-hrc-noPGC,  Biobank Japan → SakaueKanai2020, FinnGen → R12.
+
+For COHORT, SUBCOHORT, and VERSION, use only letters, numbers, and hyphens (no spaces, periods, underscores, or other punctuation).
+
+To archive and compress the summary statistics and log files use:
+
+```
+tar cvzf COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.regenie.tgz *firth*
+```
+
+Please also prepare a readme file to accompany the summary statistics based on this [description](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#readme-file).
+
 #### XWAS
 
 If you ran the X chromosome analysis then there should be 4 summary statistic files:
@@ -284,6 +320,8 @@ To archive and compress the summary statistics and log files use:
 tar cvzf COHORT[-SUBCOHORT]_CLUSTER_SEX_VERSION.XWAS.tgz *model2*log* *xwas*log*
 ```
 
+Please also prepare a readme file to accompany the summary statistics based on this [description](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#readme-file).
+
 #### Other
 
 If any other association analysis software was used for the analyses, then please ensure the following information is included in the summary statistics.
@@ -311,6 +349,8 @@ If any other association analysis software was used for the analyses, then pleas
 •	Test statistic of association: T-statistic or Z-score
 
 •	Association test -log10(p-value)
+
+Please also prepare a readme file to accompany the summary statistics, see below.
 
 ### README file
 
