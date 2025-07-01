@@ -42,7 +42,6 @@ We have prepared [sample code](https://github.com/psychiatric-genomics-consortiu
 
 The format of the results files, naming conventions, and what to return to us is provided [lower down the page](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#format-of-the-results-files-and-naming-conventions). Please also prepare a readme file to accompany the summary statistics based on this [description](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#readme-file).
 
-
 It is advised to create a working directory to which you have read, write and execute access for the analysis and then move into that directory:
 
 ```
@@ -77,7 +76,7 @@ The schematic below illustrates the analysis pipeline for the autosomal chromoso
  
 #### Step 1
 
-Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be performed using the [1_Relatedness.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh) sample code by running the code below. You are likely to need to update the software name (in this instance plink2) and the filename prefix (i.e. leave off bed/bim/fam) in all subsequent code snippets.
+Step 1 is to examine your data to determine the proportion of second-degree relatives in your data using the KING-robust kinship estimator in PLINK. This can be performed using the [1_Relatedness.sh](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/blob/master/post_imputation/1_Relatedness.sh) sample code by running the code below. You are likely to need to update the software name (in this instance plink2) to match that used on your server and the filename prefix (i.e. leave off bed/bim/fam) in all subsequent code snippets.
 
 ```
 module load plink2
