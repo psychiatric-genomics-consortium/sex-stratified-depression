@@ -2,9 +2,10 @@
 
 ## usage:
 ## $ module load regenie
-## $ ./5_regenie_Step1_FEMALE.sh {filename} {covariate filename}
-## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix. The {covariatefilename} is the full name of the file
-## containing the PCs identified as associated with depression using 4_Associated_PCAs.r along with age and any other relevant covariates
+## $ ./5_regenie_Step1_FEMALE.sh filename filename_qc1_female_PCA.covar
+## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix. 
+## After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4,
+## then you will only need to update the filename prefix.
 
 regenie \
 --step 1 \
