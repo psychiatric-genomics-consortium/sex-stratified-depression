@@ -380,12 +380,12 @@ Prepare a plaintext file with analyst and study information called COHORT[-SUBCO
 
 ## Lead Analysts
 
-* **David Howard** - *analyst* - [PGC](https://med.unc.edu/pgc)
-* **Joel Gelernter** - *analyst* - [PGC](https://med.unc.edu/pgc)
-* **Dan Levey** - *analyst* - [PGC](https://med.unc.edu/pgc)
-* **Murray Stein** - *analyst* - [PGC](https://med.unc.edu/pgc)
-* **Mark Adams** - *analyst* - [PGC](https://med.unc.edu/pgc)
-* **Alexandre Lussier** - *analyst* - [PGC](https://med.unc.edu/pgc)
+* [David Howard](https://www.kcl.ac.uk/people/david-howard)
+* [Joel Gelernter](https://medicine.yale.edu/profile/joel-gelernter/)
+* [Dan Levey](https://medicine.yale.edu/profile/daniel-levey/)
+* [Murray Stein](https://profiles.ucsd.edu/murray.stein)
+* [Mark Adams](https://edwebprofiles.ed.ac.uk/profile/dr-mark-james-adams)
+* [Alexandre Lussier](https://researchers.mgh.harvard.edu/profile/18516105/Alexandre-Lussier)
 
 ## License
 
