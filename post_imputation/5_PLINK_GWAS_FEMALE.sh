@@ -5,7 +5,7 @@
 ## $ module load plink2
 ## $ ./sex-stratified-depression/post_imputation/5_PLINK_GWAS_FEMALE.sh filename filename_qc1_female_PCA.covar
 
-## filename is the original name of your data without the .bed/.bim/.fam suffix. After the filename, the covariate filename is also required and 
+## filename is the name of your data without the .bed/.bim/.fam suffix. After the filename, the covariate filename is also required and 
 ## if you have retained the covariate filenames from Step 4, then you will just need to update the filename prefix.
 
 plink2 \
