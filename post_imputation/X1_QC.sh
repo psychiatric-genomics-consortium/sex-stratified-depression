@@ -11,8 +11,8 @@
 ## variants with significantly different frequencies between the sexes
 
 ## usage:
-## $ ./X1_QC.sh {filename}
-## * note {filename} is the name of your data file without the .bed/.bim/.fam suffix
+## $ ./X1_QC.sh filename
+## * note filename is the name of your data file without the .bed/.bim/.fam suffix
 
 echo "filename $1" > params_qc.txt
 echo "xwasloc xwas-3.0/bin/" >> params_qc.txt
