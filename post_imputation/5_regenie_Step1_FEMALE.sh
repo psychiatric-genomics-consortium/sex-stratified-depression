@@ -3,7 +3,7 @@
 ## usage:
 ## $ module load regenie
 ## $ ./5_regenie_Step1_FEMALE.sh filename filename_qc1_female_PCA.covar
-## * note {filename} is the original name of your data without the .bed/.bim/.fam suffix. 
+## *note filename is the name of your data without the .bed/.bim/.fam suffix. 
 ## After the filename, the covariate filename is also required and if you have retained the covariate filenames from Step 4,
 ## then you will only need to update the filename prefix.
 
