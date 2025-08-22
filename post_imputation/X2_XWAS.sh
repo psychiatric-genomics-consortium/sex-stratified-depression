@@ -1,7 +1,7 @@
 ## Script to run X chromosome analysis using the XWAS software
 
 ## usage:
-## $ ./X2_XWAS.sh filename filename_qc1_PCA_forX.covar
+## $ ./X2_XWAS.sh filename filename_qc_PCA_forX.covar
 ## * note filename is the  name of your data without the .bed/.bim/.fam suffix. 
 ## After the filename, the covariate filename is also required and
 ## if you have retained the covariate filenames created during Step 4 of the autosomal analysis, 
