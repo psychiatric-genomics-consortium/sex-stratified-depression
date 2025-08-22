@@ -195,7 +195,9 @@ The XWAS software (https://github.com/KeinanLab/xwas-3.0) is recommended for the
 
 From your existing working directory clone the XWAS repository from Github using:
 
-```git clone https://github.com/KeinanLab/xwas-3.0.git```
+```
+git clone https://github.com/KeinanLab/xwas-3.0.git
+```
 
 We have prepared sample code for the remaining steps, located here: [post_imputation](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression/tree/master/post_imputation). The sample code will have been cloned to your working directory during the autosomal steps [above](https://github.com/psychiatric-genomics-consortium/sex-stratified-depression#autosomal-chromosomes). There are comments at the top of each sample code with instructions. The sample code expects genome-wide (autosomes plus the X chromosome) imputed data to be in best guess/hard called bed/bim/fam PLINK format with sex in column 5 (male = 1, female = 2) of the fam file. 
 
