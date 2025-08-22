@@ -18,7 +18,7 @@
 
 plink2 \
 --bfile $1 \
---keep $1_qc1.id \
+--keep $1_qc.id \
 --extract genotypedvariants.txt \
 --max-alleles 2 \
 --snps-only \
@@ -27,12 +27,12 @@ plink2 \
 --geno 0.01 \
 --hwe 1e-15 \
 --indep-pairwise 1000 100 0.9 \
---out $1_qc1_geno
+--out $1_qc_geno
 
 ## females
 plink2 \
 --bfile $1 \
---keep $1_qc1_female.id \
+--keep $1_qc_female.id \
 --extract genotypedvariants.txt \
 --max-alleles 2 \
 --snps-only \
@@ -41,12 +41,12 @@ plink2 \
 --geno 0.01 \
 --hwe 1e-15 \
 --indep-pairwise 1000 100 0.9 \
---out $1_qc1_female_geno
+--out $1_qc_female_geno
 
 ##males
 plink2 \
 --bfile $1 \
---keep $1_qc1_male.id \
+--keep $1_qc_male.id \
 --extract genotypedvariants.txt \
 --max-alleles 2 \
 --snps-only \
@@ -55,4 +55,4 @@ plink2 \
 --geno 0.01 \
 --hwe 1e-15 \
 --indep-pairwise 1000 100 0.9 \
---out $1_qc1_male_geno
+--out $1_qc_male_geno
