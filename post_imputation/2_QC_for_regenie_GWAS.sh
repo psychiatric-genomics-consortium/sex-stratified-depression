@@ -29,7 +29,7 @@ plink2 \
 --hwe 1e-6 \
 --write-samples \
 --write-snplist \
---out $1_qc1
+--out $1_qc
 
 ## females
 plink2 \
@@ -45,7 +45,7 @@ plink2 \
 --hwe 1e-6 \
 --write-samples \
 --write-snplist \
---out $1_qc1_female
+--out $1_qc_female
 
 # males
 plink2 \
@@ -61,4 +61,4 @@ plink2 \
 --hwe 1e-6 \
 --write-samples \
 --write-snplist \
---out $1_qc1_male
+--out $1_qc_male
