@@ -3,7 +3,7 @@
 
 ## usage:
 ## $ module load plink2
-## $ ./sex-stratified-depression/post_imputation/5_PLINK_GWAS_GxSEX.sh filename filename_qc1_PCA.covar covariate_sex_number
+## $ ./sex-stratified-depression/post_imputation/5_PLINK_GWAS_GxSEX.sh filename filename_qc_PCA.covar covariate_sex_number
 
 ## filename is the name of your data without the .bed/.bim/.fam suffix. 
 ## After the filename, the covariate filename is also required and 
@@ -18,9 +18,9 @@ param2=$((param1+$3))
 plink2 \
 --bfile $1 \
 --pheno $1.pheno \
---keep $1_qc1.id \
---extract $1_qc1.snplist \
+--keep $1_qc.id \
+--extract $1_qc.snplist \
 --glm interaction 'log10' cols=chrom,pos,omitted,a1freqcc,totallele,totallelecc,machr2,firth,test,nobs,orbeta,se,p  \
 --covar $2 \
 --parameters 1-$param1, $param2 \
---out $1_qc1_GWAS
+--out $1_qc_GWAS
