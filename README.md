@@ -68,7 +68,7 @@ The sample code requires that the relevant software has been loaded using ```mod
 
 All sample code should be treated as a beta testing software release. All log and output files should be checked carefully to make sure the code has performed as expected for your data.
 
-A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID, IID, depression).
+A three column depression phenotype file (Family ID, Individuals ID, depression status (control = 1, case = 2)) is required in the working directory and will need to have the same filename as your imputed data with a .pheno suffix. A header row in the phenotype file is optional if you are planning to use PLINK for the GWAS, but regenie will require a header row (FID IID depression).
 
 The schematic below illustrates the analysis pipeline for the autosomal chromosomes:
 
